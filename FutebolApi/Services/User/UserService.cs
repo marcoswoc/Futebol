@@ -1,4 +1,7 @@
-﻿using FutebolApi.Models;
+﻿using FutebolApi.Data;
+using FutebolApi.Data.Repositories;
+using FutebolApi.Entity;
+using FutebolApi.Models;
 using FutebolApi.Models.UserModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -12,15 +15,18 @@ public class UserService : IUserService
     private readonly IConfiguration _configuration;
     private readonly UserManager<IdentityUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly IPlayerRepository _playerRepository;
 
     public UserService(
         IConfiguration configuration,
         UserManager<IdentityUser> userManager,
-        RoleManager<IdentityRole> roleManager)
+        RoleManager<IdentityRole> roleManager,
+        IPlayerRepository playerRepository)
     {
         _configuration = configuration;
         _userManager = userManager;
         _roleManager = roleManager;
+        _playerRepository = playerRepository;
     }
 
     public async Task<ResponseModel> CreateUserAsync(CreateUserModel model)
@@ -43,6 +49,7 @@ public class UserService : IUserService
             return new() { Success = false, Message = string.Join(",", result.Errors.Select(x => x.Description)) };
 
         await AddToRoleAsync(user, "user");
+        await AddPlayerAsync(user);
 
         return new() { Message = "Usuário criado com sucesso!" };
 
@@ -93,5 +100,11 @@ public class UserService : IUserService
         );
 
         return new() { Token = new JwtSecurityTokenHandler().WriteToken(token), ValidTo = token.ValidTo };
+    }
+
+    private async Task AddPlayerAsync(IdentityUser user)
+    {
+        var player = new Player { Name = user.UserName, User = user };
+        await _playerRepository.CreateAsync(player);
     }
 }

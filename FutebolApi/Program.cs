@@ -1,4 +1,5 @@
 using FutebolApi.Data;
+using FutebolApi.Data.Repositories;
 using FutebolApi.Services.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -71,7 +72,10 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository<DataContext>>();
+
 builder.Services.AddScoped<IUserService, UserService>();
+
 
 var app = builder.Build();
 
@@ -88,5 +92,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+await SeedData.Initialize(builder.Services.BuildServiceProvider(), builder.Configuration);
 
 app.Run();
