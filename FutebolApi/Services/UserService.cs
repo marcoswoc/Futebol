@@ -1,14 +1,14 @@
-﻿using FutebolApi.Data;
-using FutebolApi.Data.Repositories;
+﻿using FutebolApi.Data.Repositories.Interfaces;
 using FutebolApi.Entity;
 using FutebolApi.Models;
-using FutebolApi.Models.UserModel;
+using FutebolApi.Models.User;
+using FutebolApi.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace FutebolApi.Services.User;
+namespace FutebolApi.Services;
 
 public class UserService : IUserService
 {

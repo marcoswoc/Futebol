@@ -1,4 +1,4 @@
-﻿namespace FutebolApi.Models.UserModel;
+﻿namespace FutebolApi.Models.User;
 
 public class TokenModel
 {

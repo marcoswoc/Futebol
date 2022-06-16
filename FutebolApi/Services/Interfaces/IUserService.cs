@@ -1,7 +1,7 @@
 ﻿using FutebolApi.Models;
-using FutebolApi.Models.UserModel;
+using FutebolApi.Models.User;
 
-namespace FutebolApi.Services.User;
+namespace FutebolApi.Services.Interfaces;
 
 public interface IUserService
 {

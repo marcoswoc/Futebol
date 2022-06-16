@@ -1,6 +1,9 @@
+using FutebolApi;
 using FutebolApi.Data;
 using FutebolApi.Data.Repositories;
-using FutebolApi.Services.User;
+using FutebolApi.Data.Repositories.Interfaces;
+using FutebolApi.Services;
+using FutebolApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -72,9 +75,12 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddAutoMapper(x => { x.AllowNullCollections = true; }, typeof(MapperProfile));
+
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository<DataContext>>();
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
 
 
 var app = builder.Build();

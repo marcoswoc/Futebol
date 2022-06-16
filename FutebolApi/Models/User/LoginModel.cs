@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FutebolApi.Models.UserModel;
+namespace FutebolApi.Models.User;
 
 public class LoginModel
 {

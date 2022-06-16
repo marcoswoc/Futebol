@@ -1,5 +1,5 @@
-﻿using FutebolApi.Models.UserModel;
-using FutebolApi.Services.User;
+﻿using FutebolApi.Models.User;
+using FutebolApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

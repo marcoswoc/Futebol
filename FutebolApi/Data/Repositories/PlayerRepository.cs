@@ -1,4 +1,5 @@
-﻿using FutebolApi.Entity;
+﻿using FutebolApi.Data.Repositories.Interfaces;
+using FutebolApi.Entity;
 
 namespace FutebolApi.Data.Repositories;
 
