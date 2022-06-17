@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FutebolApi.Data.Repositories.Interfaces;
+using FutebolApi.Models;
 using FutebolApi.Models.Player;
 using FutebolApi.Services.Interfaces;
 
@@ -16,19 +17,19 @@ public class PlayerService : IPlayerService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<PlayerModel>> GetAllAsync()
+    public async Task<ResponseModel<IEnumerable<PlayerModel>>> GetAllAsync()
     {
         var entities = await _repository.GetAllAsync();
-        return _mapper.Map<IEnumerable<PlayerModel>>(entities);
+        return new() { Data = _mapper.Map<IEnumerable<PlayerModel>>(entities) };
     }
 
-    public async Task<PlayerModel> GetByIdAsync(Guid id)
+    public async Task<ResponseModel<PlayerModel>> GetByIdAsync(Guid id)
     {
         var entity = await _repository.GetByIdAsync(id);
-        return _mapper.Map<PlayerModel>(entity);
+        return new() { Data = _mapper.Map<PlayerModel>(entity) };
     }
 
-    public async Task<PlayerModel> UpdateAsync(UpdatePlayerModel model, Guid id)
+    public async Task<ResponseModel<PlayerModel>> UpdateAsync(UpdatePlayerModel model, Guid id)
     {
         var entity = await _repository.GetByIdAsync(id);
 
@@ -36,6 +37,6 @@ public class PlayerService : IPlayerService
 
         await _repository.UpdateAsync(entity);
 
-        return _mapper.Map<PlayerModel>(entity);
+        return new() { Data = _mapper.Map<PlayerModel>(entity) };
     }
 }

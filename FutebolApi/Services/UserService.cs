@@ -55,7 +55,7 @@ public class UserService : IUserService
 
     }
 
-    public async Task<ResponseModel> LoginAsync(LoginModel model)
+    public async Task<ResponseModel<TokenModel>> LoginAsync(LoginModel model)
     {
         var user = await _userManager.FindByEmailAsync(model.Email);
 

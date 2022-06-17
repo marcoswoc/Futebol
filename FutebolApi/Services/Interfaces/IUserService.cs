@@ -6,5 +6,5 @@ namespace FutebolApi.Services.Interfaces;
 public interface IUserService
 {
     Task<ResponseModel> CreateUserAsync(CreateUserModel model);
-    Task<ResponseModel> LoginAsync(LoginModel model);
+    Task<ResponseModel<TokenModel>> LoginAsync(LoginModel model);
 }
