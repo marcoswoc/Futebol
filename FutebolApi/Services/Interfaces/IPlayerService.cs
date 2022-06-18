@@ -1,5 +1,4 @@
-﻿using FutebolApi.Entity;
-using FutebolApi.Models;
+﻿using FutebolApi.Models;
 using FutebolApi.Models.Player;
 
 namespace FutebolApi.Services.Interfaces;

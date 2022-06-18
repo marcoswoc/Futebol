@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FutebolApi.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-//[Authorize]
+[Authorize]
 public class PlayerController : ControllerBase
 {
     private readonly IPlayerService _playerService;

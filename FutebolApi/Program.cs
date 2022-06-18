@@ -78,9 +78,11 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddAutoMapper(x => { x.AllowNullCollections = true; }, typeof(MapperProfile));
 
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository<DataContext>>();
+builder.Services.AddScoped<IRoundRepository, RoundRepository<DataContext>>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<IRoundService, RoundService>();
 
 
 var app = builder.Build();
