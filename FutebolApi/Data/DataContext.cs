@@ -19,4 +19,5 @@ public class DataContext : IdentityDbContext<IdentityUser>
 
     public DbSet<Player> Players { get; set; }
     public DbSet<Round> Rounds { get; set; }
+    public DbSet<Vote> Votes { get; set; }
 }

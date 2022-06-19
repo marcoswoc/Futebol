@@ -79,10 +79,12 @@ builder.Services.AddAutoMapper(x => { x.AllowNullCollections = true; }, typeof(M
 
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository<DataContext>>();
 builder.Services.AddScoped<IRoundRepository, RoundRepository<DataContext>>();
+builder.Services.AddScoped<IVoteRepository, VoteRepository<DataContext>>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IRoundService, RoundService>();
+builder.Services.AddScoped<IVoteService, VoteService>();
 
 
 var app = builder.Build();

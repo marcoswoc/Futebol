@@ -2,6 +2,7 @@
 using FutebolApi.Entity;
 using FutebolApi.Models.Player;
 using FutebolApi.Models.Round;
+using FutebolApi.Models.Vote;
 
 namespace FutebolApi;
 
@@ -14,5 +15,8 @@ public class MapperProfile : Profile
         
         CreateMap<Round, RoundModel>().ReverseMap();
         CreateMap<Round, CreateRoundModel>().ReverseMap();
+
+        CreateMap<Vote, VoteModel>().ReverseMap();
+        CreateMap<Vote, CreateVoteModel>().ReverseMap();
     }
 }
