@@ -5,7 +5,7 @@ namespace FutebolApi.Services.Interfaces;
 
 public interface IVoteService
 {
-    Task<ResponseModel<IEnumerable<VoteModel>>> GetAllAsync();
-    Task<ResponseModel<VoteModel>> GetByIdAsync(Guid id);
+    Task<ResponseModel<IEnumerable<VoteModel>>> GetAllAsync();    
     Task<ResponseModel<VoteModel>> CreateAsync(CreateVoteModel model);
+    Task<ResponseModel<VoteModel>> UpdateAsync(UpdateVoteModel model, Guid id);
 }

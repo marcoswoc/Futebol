@@ -6,5 +6,5 @@ public class Player
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
-    public IdentityUser User { get; set; }
+    public virtual IdentityUser User { get; set; }
 }

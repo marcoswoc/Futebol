@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace FutebolApi.Data;
 
@@ -29,7 +30,7 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
             _context.Set<TEntity>().Remove(entity);
             await _context.SaveChangesAsync();
         }
-    }
+    }   
 
     public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
     {
@@ -46,5 +47,10 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
         _context.Entry(entity).State = EntityState.Modified;
 
         await _context.SaveChangesAsync();
+    }
+
+    public virtual async Task<IEnumerable<TEntity>> FindExpressionAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await _context.Set<TEntity>().Where(predicate).ToListAsync();
     }
 }

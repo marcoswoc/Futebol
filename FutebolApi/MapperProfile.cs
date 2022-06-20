@@ -18,5 +18,6 @@ public class MapperProfile : Profile
 
         CreateMap<Vote, VoteModel>().ReverseMap();
         CreateMap<Vote, CreateVoteModel>().ReverseMap();
+        CreateMap<Vote, UpdateVoteModel>().ReverseMap();
     }
 }

@@ -65,7 +65,7 @@ public class UserService : IUserService
             {
                 new(ClaimTypes.Email, user.Email),
                 new(ClaimTypes.Name, user.UserName),
-                new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
             var userRoles = await _userManager.GetRolesAsync(user);

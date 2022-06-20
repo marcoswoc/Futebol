@@ -7,4 +7,10 @@ public class Round
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public bool Active { get; set; }
+
+    public bool IsActive()
+    {
+        var dateNow = DateTime.Now.Date;
+        return dateNow >= StartDate.Date && dateNow <= EndDate.Date;
+    }
 }
