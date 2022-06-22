@@ -86,18 +86,13 @@ builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IRoundService, RoundService>();
 builder.Services.AddScoped<IVoteService, VoteService>();
 
+builder.WebHost.UseUrls($"https://*:{Environment.GetEnvironmentVariable("PORT")}");
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
-
-
 app.UseAuthentication();
 app.UseAuthorization();
 
