@@ -44,5 +44,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "futebolapi"
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          appdir: "app"
           usedocker: true
