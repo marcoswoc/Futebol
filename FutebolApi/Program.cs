@@ -46,6 +46,16 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseNpgsql(defaultConnectionString);
 });
 
+var serviceProvider = builder.Services.BuildServiceProvider();
+try
+{
+    var dbContext = serviceProvider.GetRequiredService<DataContext>();
+    dbContext.Database.Migrate();
+}
+catch
+{
+}
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<DataContext>()
     .AddDefaultTokenProviders();
