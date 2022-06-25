@@ -16,9 +16,35 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+
+var defaultConnectionString = string.Empty;
+
+if (builder.Environment.EnvironmentName == "Development")
+{
+    defaultConnectionString = builder.Configuration.GetConnectionString("NpgSqlDefaultConnection");
+}
+else
+{
+    // Use connection string provided at runtime by Heroku.
+    var connectionUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+    connectionUrl = connectionUrl.Replace("postgres://", string.Empty);
+    var userPassSide = connectionUrl.Split("@")[0];
+    var hostSide = connectionUrl.Split("@")[1];
+
+    var user = userPassSide.Split(":")[0];
+    var password = userPassSide.Split(":")[1];
+    var host = hostSide.Split("/")[0];
+    var database = hostSide.Split("/")[1].Split("?")[0];
+
+    defaultConnectionString = $"Host={host};Database={database};Username={user};Password={password};SSL Mode=Require;Trust Server Certificate=true";
+
+}
+
 builder.Services.AddDbContext<DataContext>(opt =>
 {
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    //opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    opt.UseNpgsql(defaultConnectionString);
 });
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
@@ -86,7 +112,7 @@ builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IRoundService, RoundService>();
 builder.Services.AddScoped<IVoteService, VoteService>();
 
-builder.WebHost.UseUrls($"https://*:{Environment.GetEnvironmentVariable("PORT")}");
+builder.WebHost.UseUrls($"http://*:{Environment.GetEnvironmentVariable("PORT")}");
 
 var app = builder.Build();
 
