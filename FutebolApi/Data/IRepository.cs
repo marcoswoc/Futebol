@@ -10,4 +10,5 @@ public interface IRepository<TEntity> where TEntity : class
     Task<IEnumerable<TEntity>> GetAllAsync();
     Task DeleteAsync(Guid Id);
     Task<IEnumerable<TEntity>> FindExpressionAsync(Expression<Func<TEntity, bool>> predicate);
+    
 }

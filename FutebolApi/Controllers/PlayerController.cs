@@ -23,6 +23,8 @@ public class PlayerController : ControllerBase
         return Ok(await _playerService.GetAllAsync());
     }
 
+    
+
     [HttpGet("{id}")]
     public async Task<ActionResult<ResponseModel<PlayerModel>>> GetByIdAsync([FromRoute] Guid id)
     {

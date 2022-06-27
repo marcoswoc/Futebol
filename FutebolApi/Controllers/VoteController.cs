@@ -35,4 +35,10 @@ public class VoteController : ControllerBase
     {
         return Ok(await _voteService.UpdateAsync(model, id));    
     }
+
+    [HttpGet("average")]
+    public async Task<ActionResult<ResponseModel<IEnumerable<VoteAvarageModel>>>> GetAllAverageAsync()
+    {
+        return Ok(await _voteService.GetAllAverageAsync());
+    }
 }

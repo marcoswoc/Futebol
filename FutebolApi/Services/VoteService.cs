@@ -2,6 +2,7 @@
 using FutebolApi.Data.Repositories.Interfaces;
 using FutebolApi.Entity;
 using FutebolApi.Models;
+using FutebolApi.Models.Player;
 using FutebolApi.Models.Vote;
 using FutebolApi.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -78,7 +79,7 @@ public class VoteService : IVoteService
 
         var entities = await _repository.FindExpressionAsync(x => x.User.Id == user.Id);
         return new() { Data = _mapper.Map<IEnumerable<VoteModel>>(entities) };
-    }
+    }   
 
     public async Task<ResponseModel<VoteModel>> UpdateAsync(UpdateVoteModel model, Guid id)
     {
@@ -89,5 +90,31 @@ public class VoteService : IVoteService
         await _repository.UpdateAsync(entity);
 
         return new() { Data = _mapper.Map<VoteModel>(entity) };
+    }
+
+    public async Task<ResponseModel<IEnumerable<VoteAvarageModel>>> GetAllAverageAsync()
+    {
+        var entities = await _repository.GetAllAsync();
+
+        var result = entities.GroupBy(x => x.Player);
+        var list = new List<VoteAvarageModel>();
+
+        foreach (var userMedia in result)
+        {
+            var avarage = new VoteAvarageModel();
+
+            avarage.Player = _mapper.Map<PlayerModel>(userMedia.Key);
+            avarage.Defense = userMedia.Average(x => x.Defense);
+            avarage.Attack = userMedia.Average(x => x.Attack);
+            avarage.Kick = userMedia.Average(x => x.Kick);
+            avarage.Velocity = userMedia.Average(x => x.Velocity);
+            avarage.Pass = userMedia.Average(x => x.Pass);
+
+            avarage.GeneralAverage = (avarage.Defense + avarage.Attack + avarage.Kick + avarage.Velocity + avarage.Pass) / 5;
+
+            list.Add(avarage);            
+        }
+
+        return new() { Data = list };
     }
 }
