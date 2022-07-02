@@ -2,6 +2,7 @@ using FutebolApi;
 using FutebolApi.Data;
 using FutebolApi.Data.Repositories;
 using FutebolApi.Data.Repositories.Interfaces;
+using FutebolApi.Middleware;
 using FutebolApi.Services;
 using FutebolApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -136,7 +137,7 @@ app.UseCors("CorsPolicy");
 //app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.MapControllers();
 
 await SeedData.Initialize(serviceProvider, builder.Configuration);
