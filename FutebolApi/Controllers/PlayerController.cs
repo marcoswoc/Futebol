@@ -21,9 +21,7 @@ public class PlayerController : ControllerBase
     public async Task<ActionResult<ResponseModel<IEnumerable<PlayerModel>>>> GetAllAsync()
     {
         return Ok(await _playerService.GetAllAsync());
-    }
-
-    
+    }   
 
     [HttpGet("{id}")]
     public async Task<ActionResult<ResponseModel<PlayerModel>>> GetByIdAsync([FromRoute] Guid id)
@@ -35,5 +33,11 @@ public class PlayerController : ControllerBase
     public async Task<ActionResult<ResponseModel<PlayerModel>>> UpdateAsync([FromBody] UpdatePlayerModel model, [FromRoute] Guid id)
     {
         return Ok(await _playerService.UpdateAsync(model, id));
+    }
+
+    [HttpPost("image")]
+    public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
+    {
+        return Ok(await _playerService.UploadImageAsync(file));
     }
 }
