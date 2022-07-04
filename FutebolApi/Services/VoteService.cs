@@ -17,7 +17,7 @@ public class VoteService : IVoteService
     private readonly IRoundRepository _roundRepository;
     private readonly IHttpContextAccessor _httpContext;
     private readonly IMapper _mapper;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<User> _userManager;
 
     public VoteService(
         IVoteRepository repository,
@@ -25,7 +25,7 @@ public class VoteService : IVoteService
         IMapper mapper,
         IPlayerRepository playerRepository,
         IRoundRepository roundRepository,
-        UserManager<IdentityUser> userManager)
+        UserManager<User> userManager)
     {
         _repository = repository;
         _mapper = mapper;

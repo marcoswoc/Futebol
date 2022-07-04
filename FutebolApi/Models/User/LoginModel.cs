@@ -5,6 +5,7 @@ namespace FutebolApi.Models.User;
 public class LoginModel
 {
     [Required(ErrorMessage = $"{nameof(Email)} é obrigatório!")]
+    [EmailAddress]
     public string Email { get; set; }
 
     [Required(ErrorMessage = $"{nameof(Password)} é obrigatório!")]

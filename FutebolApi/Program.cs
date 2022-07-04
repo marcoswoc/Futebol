@@ -2,6 +2,8 @@ using FutebolApi;
 using FutebolApi.Data;
 using FutebolApi.Data.Repositories;
 using FutebolApi.Data.Repositories.Interfaces;
+using FutebolApi.Entity;
+using FutebolApi.Infra;
 using FutebolApi.Middleware;
 using FutebolApi.Services;
 using FutebolApi.Services.Interfaces;
@@ -49,15 +51,34 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseNpgsql(defaultConnectionString);
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<User, IdentityRole>( opt =>
+    opt.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DataContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(opt =>
+{
+    opt.Password.RequireDigit = true;
+    opt.Password.RequireLowercase = true;
+    opt.Password.RequireNonAlphanumeric = true;
+    opt.Password.RequireUppercase = true;
+    opt.Password.RequiredLength = 6;
+    opt.Password.RequiredUniqueChars = 1;
+
+    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    opt.Lockout.MaxFailedAccessAttempts = 5;
+    opt.Lockout.AllowedForNewUsers = true;
+
+    opt.SignIn.RequireConfirmedEmail = true;     
+    opt.User.RequireUniqueEmail = false;    
+});
 
 var serviceProvider = builder.Services.BuildServiceProvider();
 try
 {
     var dbContext = serviceProvider.GetRequiredService<DataContext>();
-    dbContext.Database.Migrate();
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
+        dbContext.Database.Migrate();
 }
 catch (Exception ex)
 {
@@ -121,11 +142,15 @@ builder.Services.AddAutoMapper(x => { x.AllowNullCollections = true; }, typeof(M
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository<DataContext>>();
 builder.Services.AddScoped<IRoundRepository, RoundRepository<DataContext>>();
 builder.Services.AddScoped<IVoteRepository, VoteRepository<DataContext>>();
+builder.Services.AddScoped<IUserRepository, UserRepository<DataContext>>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IRoundService, RoundService>();
 builder.Services.AddScoped<IVoteService, VoteService>();
+
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IEmailUserService, EmailUserService>();
 
 builder.WebHost.UseUrls($"http://*:{Environment.GetEnvironmentVariable("PORT")}");
 

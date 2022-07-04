@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FutebolApi.Entity;
+using Microsoft.AspNetCore.Identity;
 
 namespace FutebolApi.Data;
 
@@ -11,7 +12,7 @@ public static class SeedData
         var email = configuration["UserConfigurations:Email"];
         var password = configuration["UserConfigurations:Password"];
 
-        var userManager = servicesProvider.GetRequiredService<UserManager<IdentityUser>>();
+        var userManager = servicesProvider.GetRequiredService<UserManager<User>>();
         var roleManager = servicesProvider.GetRequiredService<RoleManager<IdentityRole>>();        
 
         if (await userManager.FindByEmailAsync(email) is null)
@@ -26,15 +27,15 @@ public static class SeedData
 
             await roleManager.CreateAsync(role);
 
-            var hasher = new PasswordHasher<IdentityUser>();
-            var user = new IdentityUser
+            var hasher = new PasswordHasher<User>();
+            var user = new User
             {
                 Id = adminId,
                 UserName = "admin",
                 NormalizedUserName = "admin".ToUpper(),
                 Email = email,
                 NormalizedEmail = email.ToUpper(),
-                EmailConfirmed = false,
+                EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, password),
                 SecurityStamp = string.Empty
             };

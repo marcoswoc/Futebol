@@ -19,7 +19,7 @@ public class UserController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserModel model)
     {
-        var result = await _userService.CreateUserAsync(model);
+        var result = await _userService.CreateUserAsync(model, Request.Headers["origin"]);
 
         return result.Success ? Ok(result) : BadRequest(result);
     }
@@ -28,6 +28,30 @@ public class UserController : ControllerBase
     public async Task<IActionResult> LoginAsync([FromBody] LoginModel model)
     {
         var result = await _userService.LoginAsync(model);
+
+        return result.Success ? Ok(result) : BadRequest(result);
+    }
+
+    [HttpPost("verify-email")]
+    public async Task<IActionResult> VerifyEmail([FromQuery] string token)
+    {
+        var result = await _userService.VerifyAsync(token);
+
+        return result.Success ? Ok(result) : BadRequest(result);
+    }
+
+    [HttpPost("forgot-password")]
+    public async Task<IActionResult> ForgotPassword([FromQuery] string email)
+    {
+        var result = await _userService.ForgotPassword(email, Request.Headers["origin"]);
+
+        return result.Success ? Ok(result) : BadRequest(result);
+    }
+
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPassword([FromQuery] ResetPasswordModel model)
+    {
+        var result = await _userService.ResetPassword(model);
 
         return result.Success ? Ok(result) : BadRequest(result);
     }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FutebolApi.Data;
 
-public class DataContext : IdentityDbContext<IdentityUser>
+public class DataContext : IdentityDbContext<User>
 {
     
     public DataContext(DbContextOptions options) : base(options)
@@ -24,5 +24,5 @@ public class DataContext : IdentityDbContext<IdentityUser>
 
     public DbSet<Player> Players { get; set; }
     public DbSet<Round> Rounds { get; set; }
-    public DbSet<Vote> Votes { get; set; }
+    public DbSet<Vote> Votes { get; set; }    
 }
