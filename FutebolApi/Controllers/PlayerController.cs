@@ -36,6 +36,7 @@ public class PlayerController : ControllerBase
     }
 
     [HttpPost("image")]
+    [RequestSizeLimit(52428800)]
     public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
     {
         return Ok(await _playerService.UploadImageAsync(file));

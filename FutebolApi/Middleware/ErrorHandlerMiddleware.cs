@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using FutebolApi.Models;
+using System.Net;
 using System.Text.Json;
 
 namespace FutebolApi.Middleware;
@@ -35,7 +36,7 @@ public class ErrorHandlerMiddleware
                     break;
             }
 
-            var result = JsonSerializer.Serialize(new { message = error?.Message });
+            var result = JsonSerializer.Serialize(new ResponseModel { Success = false, Message = error?.Message });
             await response.WriteAsync(result);
         }
     }
