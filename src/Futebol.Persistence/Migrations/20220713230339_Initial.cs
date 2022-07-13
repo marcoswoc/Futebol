@@ -10,6 +10,9 @@ namespace Futebol.Persistence.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence<int>(
+                name: "RoundSequence");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -32,7 +35,7 @@ namespace Futebol.Persistence.Migrations
                     UserId = table.Column<string>(type: "varchar", maxLength: 100, nullable: true),
                     Type = table.Column<string>(type: "varchar", maxLength: 100, nullable: true),
                     TableName = table.Column<string>(type: "varchar", maxLength: 100, nullable: true),
-                    DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DateTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     OldValues = table.Column<string>(type: "varchar", maxLength: 8000, nullable: true),
                     NewValues = table.Column<string>(type: "varchar", maxLength: 8000, nullable: true),
                     AffectedColumns = table.Column<string>(type: "varchar", maxLength: 8000, nullable: true),
@@ -48,13 +51,13 @@ namespace Futebol.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Number = table.Column<int>(type: "integer", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Number = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('\"RoundSequence\"')"),
+                    StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     bit = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,10 +71,10 @@ namespace Futebol.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     VerificationToken = table.Column<string>(type: "text", nullable: true),
                     ResetToken = table.Column<string>(type: "text", nullable: true),
-                    ResetTokenExpires = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ResetTokenExpires = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -206,9 +209,9 @@ namespace Futebol.Persistence.Migrations
                     Name = table.Column<string>(type: "varchar", maxLength: 100, nullable: true),
                     ImageUrl = table.Column<string>(type: "varchar", maxLength: 200, nullable: true),
                     UserId = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -233,9 +236,9 @@ namespace Futebol.Persistence.Migrations
                     Velocity = table.Column<int>(type: "integer", nullable: false),
                     Kick = table.Column<int>(type: "integer", nullable: false),
                     Pass = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -369,6 +372,9 @@ namespace Futebol.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropSequence(
+                name: "RoundSequence");
         }
     }
 }

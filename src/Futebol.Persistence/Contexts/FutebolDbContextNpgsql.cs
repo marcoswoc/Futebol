@@ -21,9 +21,10 @@ public class FutebolDbContextNpgsql : FutebolDbContext
         {
             optionsBuilder.UseNpgsql(Configuration.GetConnectionString("FutebolDbContextNpgsql"), opt =>
             {
+                
                 opt.EnableRetryOnFailure();
             });
-        }
+        }       
 
         base.OnConfiguring(optionsBuilder);
         optionsBuilder.UseLazyLoadingProxies();

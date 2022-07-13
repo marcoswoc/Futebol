@@ -19,6 +19,13 @@ public class RoundService : IRoundService
 
     public async Task<ResponseDto<RoundDto>> CreateAsync(CreateRoundDto dto)
     {
+        if (dto.StartDate.Date >= dto.EndDate.Date)
+            return new() { Success = false, Message = "Data Inicio maior ou igual que Data Fim" };
+
+        var exists = await _repository.FindExpressionAsync(x => x.EndDate.Date >= dto.StartDate.Date);
+        if (exists.Any())
+            return new() { Success = false, Message = "Já existe um Round Cadastrado para a data Inicio" };
+
         var entity = await _repository.CreateAsync(_mapper.Map<Round>(dto));
         return new() { Data = _mapper.Map<RoundDto>(entity) };
     }

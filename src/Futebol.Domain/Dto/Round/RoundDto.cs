@@ -2,5 +2,6 @@
 public class RoundDto : CreateRoundDto
 {
     public Guid Id { get; set; }
-    public bool Active { get; set; }
+    public bool IsActive { get; set; }
+    public int Number { get; set; }
 }
