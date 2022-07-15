@@ -10,12 +10,12 @@ public class ContextEventHandler
         SavedChanges += AuditEvent.SavedChanges;
     }
 
-    public void InvokeSavingChanges(object sender, EventArgs? eventArgs = null)
+    public void InvokeSavingChanges(object sender, EventArgs eventArgs = null)
     {
         SavingChanges?.Invoke(sender, eventArgs);
     }
 
-    public void InvokeSavedChanges(object sender, EventArgs? eventArgs = null)
+    public void InvokeSavedChanges(object sender, EventArgs eventArgs = null)
     {
         SavedChanges?.Invoke(sender, eventArgs);
     }

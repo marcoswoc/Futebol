@@ -43,7 +43,7 @@ public class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : clas
         return await _context.Set<TEntity>().ToListAsync();
     }
 
-    public virtual async Task<TEntity?> GetByIdAsync(Guid Id)
+    public virtual async Task<TEntity> GetByIdAsync(Guid Id)
     {
         return await _context.Set<TEntity>().FindAsync(Id);
     }

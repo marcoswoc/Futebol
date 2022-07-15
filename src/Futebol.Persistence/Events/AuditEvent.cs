@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Futebol.Persistence.Events;
 public static class AuditEvent
 {
-    public static void SavingChanges(object sender, EventArgs? eventArgs = null)
+    public static void SavingChanges(object sender, EventArgs eventArgs = null)
     {
-        if (!(sender is DbContext context)) return;
+        if (sender is not DbContext context) return;
 
         foreach (var entrie in context.ChangeTracker.Entries())
         {
@@ -29,5 +29,5 @@ public static class AuditEvent
         }
     }
 
-    public static void SavedChanges(object sender, EventArgs? eventArgs = null) { }
+    public static void SavedChanges(object sender, EventArgs eventArgs = null) { }
 }

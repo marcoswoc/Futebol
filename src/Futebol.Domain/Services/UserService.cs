@@ -58,7 +58,11 @@ public class UserService : IUserService
 
         await AddToRoleAsync(user, "user");
         await AddPlayerAsync(user);
-        await _emailService.SendVerificationEmail(user, origin);
+
+        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+            await _emailService.SendVerificationEmail(user, origin);
+        else
+            await VerifyAsync(user.VerificationToken);
 
         return new() { Message = "Usuário criado com sucesso. Verifique sua caixa de email para confirmar seu cadastro!" };
 
