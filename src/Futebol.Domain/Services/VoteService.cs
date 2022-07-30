@@ -94,17 +94,27 @@ public class VoteService : IVoteService
 
         foreach (var userMedia in result)
         {
+            var attributes = new List<VoteAttributesDto>();
+
+            var defense = userMedia.Average(x => x.Defense);
+            var attack = userMedia.Average(x => x.Attack);
+            var kick = userMedia.Average(x => x.Kick);
+            var velocity = userMedia.Average(x => x.Velocity);
+            var pass = userMedia.Average(x => x.Pass);
+            var generalAverage = (defense + attack + kick + velocity + pass) / 5;
+
+            attributes.Add(new() { Name = nameof(defense), Value = defense });
+            attributes.Add(new() { Name = nameof(attack), Value = attack });
+            attributes.Add(new() { Name = nameof(kick), Value = kick });
+            attributes.Add(new() { Name = nameof(velocity), Value = velocity });
+            attributes.Add(new() { Name = nameof(pass), Value = pass });
+            attributes.Add(new() { Name = nameof(generalAverage), Value = generalAverage });
+
             var avarage = new VoteAvarageDto
             {
                 Player = _mapper.Map<PlayerDto>(userMedia.Key),
-                Defense = userMedia.Average(x => x.Defense),
-                Attack = userMedia.Average(x => x.Attack),
-                Kick = userMedia.Average(x => x.Kick),
-                Velocity = userMedia.Average(x => x.Velocity),
-                Pass = userMedia.Average(x => x.Pass)
-            };
-
-            avarage.GeneralAverage = (avarage.Defense + avarage.Attack + avarage.Kick + avarage.Velocity + avarage.Pass) / 5;
+                VoteAttributes = attributes
+            };         
 
             list.Add(avarage);
         }

@@ -37,6 +37,7 @@ public class MapperProfile : Profile
         CreateMap<TokenDto, TokenModel>().ReverseMap();
 
         CreateMap<VoteAvarageDto, VoteAvarageModel>().ReverseMap();
+        CreateMap<VoteAttributesDto, VoteAttributesModel>().ReverseMap();
         CreateMap<ResponseDto, ResponseModel>().ReverseMap();
         CreateMap(typeof(ResponseDto<>), typeof(ResponseModel<>)).ReverseMap();
     }

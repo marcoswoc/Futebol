@@ -10,7 +10,7 @@ public class RoundConfiguration : IEntityTypeConfiguration<Round>
     {
         builder.ToTable("Rounds");
        
-        builder.Property(p => p.Active).HasColumnName("bit");
+        builder.Property(p => p.Active);
         builder.Property(p => p.Number).HasDefaultValueSql(_NEXT_VALUE_SEQUENCE);
 
         builder.HasIndex(p => p.DeletedAt);
