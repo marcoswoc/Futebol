@@ -43,17 +43,25 @@ public class PlayerService : IPlayerService
         return new() { Data = _mapper.Map<PlayerDto>(entity) };
     }
 
-    public async Task<ResponseDto<string>> UploadImageAsync(IFormFile model, string fileName)
+    public async Task<ResponseDto<string>> UploadImageAsync(IFormFile model, string userEmail)
     {
         if (!model.ContentType.Contains("image"))
             return new() { Success = false, Message = "Upload apenas de imagens" };
 
+        var fileName = $"{userEmail.Split("@").First()}";
+
         var result = await _uploadImage.UploadImageAsync(model, fileName);
 
-        if (result.Item2 == true)
-            return new() { Data = result.Item1 };
+        if (result.Item2 != true)
+            return new() { Success = false, Message = "Erro Upload" };
+        
+        var player = (await _repository.FindExpressionAsync(x => x.User.Email == userEmail)).FirstOrDefault();
+        
+        if (player is not null)
+            player.ImageUrl = result.Item1;
 
-        return new() { Success = false, Message = "Erro Upload" };
+        await _repository.UpdateAsync(player);       
+
+        return new() { Data = result.Item1 };
     }
-
 }

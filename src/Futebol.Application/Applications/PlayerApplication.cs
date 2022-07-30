@@ -40,9 +40,9 @@ public class PlayerApplication : IPlayerApplication
     }
 
     public async Task<ResponseModel<string>> UploadImageAsync(IFormFile model)
-    {
-        var fileName = $"{_httpContext.HttpContext?.User?.FindFirst(ClaimTypes.Email).Value.Split("@").First()}";
-        var img = await _playerService.UploadImageAsync(model, fileName);
+    {        
+        var userEmail = $"{_httpContext.HttpContext?.User?.FindFirst(ClaimTypes.Email).Value}";
+        var img = await _playerService.UploadImageAsync(model, userEmail);
         
         return _mapper.Map<ResponseModel<string>>(img);
     }

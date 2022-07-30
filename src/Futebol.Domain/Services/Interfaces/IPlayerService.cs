@@ -8,5 +8,5 @@ public interface IPlayerService
     Task<ResponseDto<PlayerDto>> UpdateAsync(UpdatePlayerDto dto, Guid id);
     Task<ResponseDto<PlayerDto>> GetByIdAsync(Guid id);
     Task<ResponseDto<IEnumerable<PlayerDto>>> GetAllAsync();
-    Task<ResponseDto<string>> UploadImageAsync(IFormFile model, string fileName);
+    Task<ResponseDto<string>> UploadImageAsync(IFormFile model, string userEmail);
 }
