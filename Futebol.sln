@@ -15,17 +15,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{7A47CD05-BAC0-42A3-A93D-8CEB469BD0F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Application", "src\Futebol.Application\Futebol.Application.csproj", "{E05C80DC-1D79-4A43-BEC3-034214F7EC3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Application", "src\Futebol.Application\Futebol.Application.csproj", "{E05C80DC-1D79-4A43-BEC3-034214F7EC3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Domain", "src\Futebol.Domain\Futebol.Domain.csproj", "{8EE58342-5777-4A54-8E85-60CCF5CA1218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Domain", "src\Futebol.Domain\Futebol.Domain.csproj", "{8EE58342-5777-4A54-8E85-60CCF5CA1218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Infrastructure", "src\Futebol.Infrastructure\Futebol.Infrastructure.csproj", "{CD0AA08D-1E94-4DAD-A784-106E36F777E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Infrastructure", "src\Futebol.Infrastructure\Futebol.Infrastructure.csproj", "{CD0AA08D-1E94-4DAD-A784-106E36F777E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Persistence", "src\Futebol.Persistence\Futebol.Persistence.csproj", "{389874F0-CB9D-49AC-9C35-D2FD8C7397EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Persistence", "src\Futebol.Persistence\Futebol.Persistence.csproj", "{389874F0-CB9D-49AC-9C35-D2FD8C7397EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Web.Core", "src\Futebol.Web.Core\Futebol.Web.Core.csproj", "{CE275D73-62D9-48C4-AE75-CC451ED6237D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Web.Core", "src\Futebol.Web.Core\Futebol.Web.Core.csproj", "{CE275D73-62D9-48C4-AE75-CC451ED6237D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Web.Api", "src\Futebol.Web.Api\Futebol.Web.Api.csproj", "{D967D9E0-4BBA-41CE-8EB8-FDBFBFA95535}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Web.Api", "src\Futebol.Web.Api\Futebol.Web.Api.csproj", "{D967D9E0-4BBA-41CE-8EB8-FDBFBFA95535}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Web", "src\Futebol.Web\Futebol.Web.csproj", "{C3EAFEE1-D31F-4A25-A050-0223DE6B88D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{D967D9E0-4BBA-41CE-8EB8-FDBFBFA95535}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D967D9E0-4BBA-41CE-8EB8-FDBFBFA95535}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D967D9E0-4BBA-41CE-8EB8-FDBFBFA95535}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3EAFEE1-D31F-4A25-A050-0223DE6B88D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3EAFEE1-D31F-4A25-A050-0223DE6B88D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3EAFEE1-D31F-4A25-A050-0223DE6B88D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3EAFEE1-D31F-4A25-A050-0223DE6B88D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{389874F0-CB9D-49AC-9C35-D2FD8C7397EC} = {7A47CD05-BAC0-42A3-A93D-8CEB469BD0F4}
 		{CE275D73-62D9-48C4-AE75-CC451ED6237D} = {6C234B0C-8425-4378-8B89-1087EFF4B814}
 		{D967D9E0-4BBA-41CE-8EB8-FDBFBFA95535} = {6C234B0C-8425-4378-8B89-1087EFF4B814}
+		{C3EAFEE1-D31F-4A25-A050-0223DE6B88D3} = {6C234B0C-8425-4378-8B89-1087EFF4B814}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DB639571-243B-46E7-A8A0-0C00B513F24D}
