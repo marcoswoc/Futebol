@@ -1,0 +1,50 @@
+﻿@page "/login"
+@using Futebol.Shared.Models.User;
+@using Futebol.Web.Services;
+@inject UserServiceClient UserService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Login</PageTitle>
+
+<h3>Login</h3>
+
+<EditForm Model="@loginModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+    <div class="mb-3">
+        <InputText class="form-control" id="Email" @bind-Value="loginModel.Email" placeholder="Email" />
+    </div>
+
+    <div class="mb-3">
+        <InputText class="form-control" id="Password" @bind-Value="loginModel.Password" placeholder="Password" />
+    </div>
+
+    @if (!loggingIn)
+    {
+        <button class="btn btn-primary" type="submit">Submit</button>
+    }
+    else
+    {
+        <p>
+            Logging in...
+        </p>
+    }
+
+</EditForm>
+
+@code {
+    private LoginModel loginModel = new();
+    private bool loggingIn;
+
+    private async Task HandleValidSubmit()
+    {
+        loggingIn = true;
+        var result = await UserService.LoginAsync(loginModel);
+
+        if (result.Success)
+            NavigationManager.NavigateTo("/");
+
+        loggingIn = false;
+    }
+}

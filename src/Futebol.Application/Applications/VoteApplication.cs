@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Futebol.Application.Applications.Interfaces;
-using Futebol.Application.Models;
-using Futebol.Application.Models.Vote;
 using Futebol.Domain.Dto.Vote;
 using Futebol.Domain.Services.Interfaces;
+using Futebol.Shared.Models;
+using Futebol.Shared.Models.Vote;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 

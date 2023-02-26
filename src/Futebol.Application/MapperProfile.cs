@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
-using Futebol.Application.Models.Player;
-using Futebol.Application.Models.Round;
-using Futebol.Application.Models.User;
-using Futebol.Application.Models.Vote;
 using Futebol.Domain.Dto;
 using Futebol.Domain.Dto.Player;
 using Futebol.Domain.Dto.Round;
 using Futebol.Domain.Dto.User;
 using Futebol.Domain.Dto.Vote;
+using Futebol.Shared.Models;
+using Futebol.Shared.Models.Player;
+using Futebol.Shared.Models.Round;
+using Futebol.Shared.Models.User;
+using Futebol.Shared.Models.Vote;
 
 namespace Futebol.Application.Models;
 public class MapperProfile : Profile

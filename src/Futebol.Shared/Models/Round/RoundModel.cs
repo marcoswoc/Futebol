@@ -1,4 +1,4 @@
-﻿namespace Futebol.Application.Models.Round;
+﻿namespace Futebol.Shared.Models.Round;
 public class RoundModel : CreateRoundModel
 {
     public Guid Id { get; set; }

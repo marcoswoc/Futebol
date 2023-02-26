@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Futebol.Application.Applications.Interfaces;
-using Futebol.Application.Models;
-using Futebol.Application.Models.Round;
 using Futebol.Domain.Dto.Round;
 using Futebol.Domain.Services.Interfaces;
+using Futebol.Shared.Models;
+using Futebol.Shared.Models.Round;
 
 namespace Futebol.Application.Applications;
 public class RoundApplication : IRoundApplication

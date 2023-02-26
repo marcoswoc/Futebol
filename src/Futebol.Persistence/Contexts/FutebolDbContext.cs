@@ -1,5 +1,4 @@
-﻿using Castle.Core.Configuration;
-using Futebol.Domain.Entity;
+﻿using Futebol.Domain.Entity;
 using Futebol.Persistence.Events;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

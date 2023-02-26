@@ -1,6 +1,6 @@
 ﻿using Futebol.Application.Applications.Interfaces;
-using Futebol.Application.Models;
-using Futebol.Application.Models.Round;
+using Futebol.Shared.Models;
+using Futebol.Shared.Models.Round;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

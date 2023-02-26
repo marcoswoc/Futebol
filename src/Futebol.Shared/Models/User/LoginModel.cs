@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Futebol.Application.Models.User;
-public class LoginModel
+namespace Futebol.Shared.Models.User;
+public class LoginModel : ModelBase
 {
     [Required(ErrorMessage = $"{nameof(Email)} é obrigatório!")]
     [EmailAddress]

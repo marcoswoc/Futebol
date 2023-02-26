@@ -1,5 +1,5 @@
-﻿using Futebol.Application.Models;
-using Futebol.Application.Models.Player;
+﻿using Futebol.Shared.Models;
+using Futebol.Shared.Models.Player;
 using Microsoft.AspNetCore.Http;
 
 namespace Futebol.Application.Applications.Interfaces;

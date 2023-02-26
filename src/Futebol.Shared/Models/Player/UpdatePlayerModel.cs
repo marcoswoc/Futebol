@@ -1,4 +1,4 @@
-﻿namespace Futebol.Application.Models.Player;
+﻿namespace Futebol.Shared.Models.Player;
 public class UpdatePlayerModel
 {
     public string Name { get; set; }

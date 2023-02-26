@@ -1,4 +1,4 @@
-﻿using Futebol.Application.Models;
+﻿using Futebol.Shared.Models;
 using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;

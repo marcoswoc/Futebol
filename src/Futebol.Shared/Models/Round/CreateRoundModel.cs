@@ -1,4 +1,4 @@
-﻿namespace Futebol.Application.Models.Round;
+﻿namespace Futebol.Shared.Models.Round;
 public class CreateRoundModel
 {
     public DateTime StartDate { get; set; }

@@ -1,7 +1,7 @@
-﻿using Futebol.Application.Models.Player;
-using Futebol.Application.Models.Round;
+﻿using Futebol.Shared.Models.Player;
+using Futebol.Shared.Models.Round;
 
-namespace Futebol.Application.Models.Vote;
+namespace Futebol.Shared.Models.Vote;
 public class VoteModel : UpdateVoteModel
 {
     public Guid Id { get; set; }

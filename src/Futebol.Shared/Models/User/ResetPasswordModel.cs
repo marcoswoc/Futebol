@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Futebol.Application.Models.User;
-public class ResetPasswordModel
+namespace Futebol.Shared.Models.User;
+public class ResetPasswordModel : ModelBase
 {
     [Required]
     public string Token { get; set; }

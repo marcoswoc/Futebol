@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Futebol.Application.Applications.Interfaces;
-using Futebol.Application.Models;
-using Futebol.Application.Models.User;
 using Futebol.Domain.Dto.User;
 using Futebol.Domain.Services.Interfaces;
+using Futebol.Shared.Models;
+using Futebol.Shared.Models.User;
 
 namespace Futebol.Application.Applications;
 public class UserApplication : IUserApplication

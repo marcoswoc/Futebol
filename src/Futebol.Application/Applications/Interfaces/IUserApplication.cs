@@ -1,5 +1,5 @@
-﻿using Futebol.Application.Models;
-using Futebol.Application.Models.User;
+﻿using Futebol.Shared.Models;
+using Futebol.Shared.Models.User;
 
 namespace Futebol.Application.Applications.Interfaces;
 public interface IUserApplication

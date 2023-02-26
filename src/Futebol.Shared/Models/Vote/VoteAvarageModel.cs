@@ -1,6 +1,6 @@
-﻿using Futebol.Application.Models.Player;
+﻿using Futebol.Shared.Models.Player;
 
-namespace Futebol.Application.Models.Vote;
+namespace Futebol.Shared.Models.Vote;
 public class VoteAvarageModel
 {
     public PlayerModel Player { get; set; }

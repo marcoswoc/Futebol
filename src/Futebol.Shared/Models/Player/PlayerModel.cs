@@ -1,4 +1,4 @@
-﻿namespace Futebol.Application.Models.Player;
+﻿namespace Futebol.Shared.Models.Player;
 public class PlayerModel : UpdatePlayerModel
 {
     public Guid Id { get; set; }

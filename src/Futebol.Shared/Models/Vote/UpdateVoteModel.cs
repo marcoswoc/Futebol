@@ -1,4 +1,4 @@
-﻿namespace Futebol.Application.Models.Vote;
+﻿namespace Futebol.Shared.Models.Vote;
 public class UpdateVoteModel
 {
     public int Attack { get; set; }

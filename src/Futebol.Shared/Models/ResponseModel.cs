@@ -1,4 +1,4 @@
-﻿namespace Futebol.Application.Models;
+﻿namespace Futebol.Shared.Models;
 public class ResponseModel<T> where T : class
 {
     public bool Success { get; set; } = true;

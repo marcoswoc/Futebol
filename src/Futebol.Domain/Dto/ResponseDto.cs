@@ -1,6 +1,4 @@
-﻿using Futebol.Infrastructure.Models;
-
-namespace Futebol.Domain.Dto;
+﻿namespace Futebol.Domain.Dto;
 public class ResponseDto<T> where T : class
 {
     public bool Success { get; set; } = true;

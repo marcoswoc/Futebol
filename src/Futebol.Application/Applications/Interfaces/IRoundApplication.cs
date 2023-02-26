@@ -1,5 +1,5 @@
-﻿using Futebol.Application.Models;
-using Futebol.Application.Models.Round;
+﻿using Futebol.Shared.Models;
+using Futebol.Shared.Models.Round;
 
 namespace Futebol.Application.Applications.Interfaces;
 public interface IRoundApplication

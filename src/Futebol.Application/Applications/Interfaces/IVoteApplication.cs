@@ -1,5 +1,5 @@
-﻿using Futebol.Application.Models;
-using Futebol.Application.Models.Vote;
+﻿using Futebol.Shared.Models;
+using Futebol.Shared.Models.Vote;
 
 namespace Futebol.Application.Applications.Interfaces;
 public interface IVoteApplication

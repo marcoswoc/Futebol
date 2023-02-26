@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Futebol.Application.Models.User;
+namespace Futebol.Shared.Models.User;
 public class CreateUserModel : LoginModel
 {
     [Required(ErrorMessage = $"{nameof(UserName)} é obrigatório!")]

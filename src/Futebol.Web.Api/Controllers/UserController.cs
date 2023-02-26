@@ -1,5 +1,5 @@
 ﻿using Futebol.Application.Applications.Interfaces;
-using Futebol.Application.Models.User;
+using Futebol.Shared.Models.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
