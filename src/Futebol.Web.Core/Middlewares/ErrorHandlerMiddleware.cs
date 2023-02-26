@@ -26,7 +26,7 @@ public class ErrorHandlerMiddleware
 
             switch (error)
             {
-                case KeyNotFoundException e:
+                case KeyNotFoundException:
                     // not found error
                     response.StatusCode = (int)HttpStatusCode.NotFound;
                     break;

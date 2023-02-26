@@ -8,7 +8,8 @@ try
 
     builder.Services.AddFutebolCore(builder.Configuration);
     await builder.Services.Initialize(builder.Configuration);
-    builder.WebHost.UseUrls($"http://*:{Environment.GetEnvironmentVariable("PORT")}");
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
+        builder.WebHost.UseUrls($"http://*:{Environment.GetEnvironmentVariable("PORT")}");
 
     var app = builder.Build();
     app.UseSwagger();
@@ -23,8 +24,4 @@ try
 catch (Exception ex)
 {
     Console.WriteLine(ex.ToString());
-}
-finally
-{
-
 }
