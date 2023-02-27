@@ -27,19 +27,18 @@ public class RoundService : IRoundService
             return new() { Success = false, Message = "Já existe um Round Cadastrado para a data Inicio" };
 
         var entity = await _repository.CreateAsync(_mapper.Map<Round>(dto));
-        return new() { Data = _mapper.Map<RoundDto>(entity) };
+        return new() { Data = _mapper.Map<RoundDto>(entity), Success = true };
     }
 
     public async Task<ResponseDto<IEnumerable<RoundDto>>> GetAllAsync()
     {
         var entity = await _repository.GetAllAsync();
-        return new() { Data = _mapper.Map<IEnumerable<RoundDto>>(entity) };
+        return new() { Data = _mapper.Map<IEnumerable<RoundDto>>(entity), Success = true };
     }
 
     public async Task<ResponseDto<RoundDto>> GetByIdAsync(Guid id)
     {
         var entity = await _repository.GetByIdAsync(id);
-
-        return new() { Data = _mapper.Map<RoundDto>(entity) };
+        return new() { Data = _mapper.Map<RoundDto>(entity), Success = true };
     }
 }

@@ -63,7 +63,7 @@ public class VoteService : IVoteService
 
         entity = await _repository.CreateAsync(entity);
 
-        return new() { Data = _mapper.Map<VoteDto>(entity) };
+        return new() { Success = true, Data = _mapper.Map<VoteDto>(entity) };
     }
 
     public async Task<ResponseDto<IEnumerable<VoteDto>>> GetAllAsync(string userEmail)
@@ -71,7 +71,7 @@ public class VoteService : IVoteService
         var user = await _userManager.FindByEmailAsync(userEmail);
 
         var entities = await _repository.FindExpressionAsync(x => x.User.Id == user.Id);
-        return new() { Data = _mapper.Map<IEnumerable<VoteDto>>(entities) };
+        return new() { Success = true, Data = _mapper.Map<IEnumerable<VoteDto>>(entities) };
     }
 
     public async Task<ResponseDto<VoteDto>> UpdateAsync(UpdateVoteDto dto, Guid id)
@@ -82,7 +82,7 @@ public class VoteService : IVoteService
 
         await _repository.UpdateAsync(entity);
 
-        return new() { Data = _mapper.Map<VoteDto>(entity) };
+        return new() { Success = true, Data = _mapper.Map<VoteDto>(entity) };
     }
 
     public async Task<ResponseDto<IEnumerable<VoteAvarageDto>>> GetAllAverageAsync()
@@ -119,6 +119,6 @@ public class VoteService : IVoteService
             list.Add(avarage);
         }
 
-        return new() { Data = list };
+        return new() { Success = true, Data = list };
     }
 }

@@ -23,13 +23,13 @@ public class PlayerService : IPlayerService
     public async Task<ResponseDto<IEnumerable<PlayerDto>>> GetAllAsync()
     {
         var entities = await _repository.GetAllAsync();
-        return new() { Data = _mapper.Map<IEnumerable<PlayerDto>>(entities) };
+        return new() { Data = _mapper.Map<IEnumerable<PlayerDto>>(entities), Success = true };
     }
 
     public async Task<ResponseDto<PlayerDto>> GetByIdAsync(Guid id)
     {
         var entity = await _repository.GetByIdAsync(id);
-        return new() { Data = _mapper.Map<PlayerDto>(entity) };
+        return new() { Data = _mapper.Map<PlayerDto>(entity), Success = true };
     }
 
     public async Task<ResponseDto<PlayerDto>> UpdateAsync(UpdatePlayerDto dto, Guid id)
@@ -40,7 +40,7 @@ public class PlayerService : IPlayerService
 
         await _repository.UpdateAsync(entity);
 
-        return new() { Data = _mapper.Map<PlayerDto>(entity) };
+        return new() { Data = _mapper.Map<PlayerDto>(entity), Success = true };
     }
 
     public async Task<ResponseDto<string>> UploadImageAsync(IFormFile model, string userEmail)
@@ -52,7 +52,7 @@ public class PlayerService : IPlayerService
 
         var result = await _uploadImage.UploadImageAsync(model, fileName);
 
-        if (result.Item2 != true)
+        if (result.Item2 is false)
             return new() { Success = false, Message = "Erro Upload" };
         
         var player = (await _repository.FindExpressionAsync(x => x.User.Email == userEmail)).FirstOrDefault();
@@ -62,6 +62,6 @@ public class PlayerService : IPlayerService
 
         await _repository.UpdateAsync(player);       
 
-        return new() { Data = result.Item1 };
+        return new() { Data = result.Item1, Success = true };
     }
 }

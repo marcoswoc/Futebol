@@ -64,7 +64,7 @@ public class UserService : IUserService
         else
             await VerifyAsync(user.VerificationToken);
 
-        return new() { Message = "Usuário criado com sucesso. Verifique sua caixa de email para confirmar seu cadastro!" };
+        return new() { Success = true, Message = "Usuário criado com sucesso. Verifique sua caixa de email para confirmar seu cadastro!" };
 
     }
 
@@ -92,7 +92,7 @@ public class UserService : IUserService
             foreach (var userRole in userRoles)
                 authClaims.Add(new(ClaimTypes.Role, userRole));
 
-            return new() { Data = GetToken(authClaims) };
+            return new() { Success = true, Data = GetToken(authClaims) };
         }
 
         return new() { Success = false, Message = "Falha ao realizar login" };
@@ -108,7 +108,7 @@ public class UserService : IUserService
 
         await _userRepository.UpdateAsync(user);
 
-        return new() { Message = "Verificação confirmada" };
+        return new() { Success = true, Message = "Verificação confirmada" };
     }
 
     public async Task<ResponseDto> ForgotPassword(string email, string origin)
@@ -122,7 +122,7 @@ public class UserService : IUserService
         await _userRepository.UpdateAsync(user);
         await _emailService.SendPasswordResetEmail(user, origin);
 
-        return new() { Message = "Reset realizado, verifique seu email!" };
+        return new() { Success = true, Message = "Reset realizado, verifique seu email!" };
 
     }
 
