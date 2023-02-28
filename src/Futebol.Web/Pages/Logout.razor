@@ -1,0 +1,15 @@
+﻿@page "/logout"
+@inject UserServiceClient UserServiceClient
+@inject NavigationManager NavigationManager
+
+<h3>Logout</h3>
+
+<text>Logging out...</text>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await UserServiceClient.LogoutUser();
+        NavigationManager.NavigateTo("login");
+    }
+}

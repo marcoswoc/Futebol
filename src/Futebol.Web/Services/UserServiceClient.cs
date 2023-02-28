@@ -2,6 +2,7 @@
 using Futebol.Shared.Models;
 using System.Net.Http.Json;
 using Futebol.Web.JwtService;
+using Futebol.Web.AuthenticationProvider;
 
 namespace Futebol.Web.Services;
 
@@ -9,11 +10,13 @@ public class UserServiceClient
 {
     private readonly HttpClient _httpClient;
     private readonly ITokenService _tokenService;
+    private readonly CustomAuthenticationStateProvider _customAuthenticationStateProvider;
 
-    public UserServiceClient(HttpClient httpClient, ITokenService tokenService)
+    public UserServiceClient(HttpClient httpClient, ITokenService tokenService, CustomAuthenticationStateProvider customAuthenticationStateProvider)
     {
         _httpClient = httpClient;
         _tokenService = tokenService;
+        _customAuthenticationStateProvider = customAuthenticationStateProvider;
     }
 
     public async Task<ResponseModel> CreateUserAsync(CreateUserModel model)
@@ -28,7 +31,14 @@ public class UserServiceClient
         var response = await _httpClient.PostAsJsonAsync("User/login", model);
         var result = await response.Content.ReadFromJsonAsync<ResponseModel<TokenModel>>();
         await _tokenService.SetTokenAsync(result.Data);
+        _customAuthenticationStateProvider.StateChanged();
         return result;
+    }
+
+    public async Task LogoutUser()
+    {
+        await _tokenService.RemoveTokenAsync();
+        _customAuthenticationStateProvider.StateChanged();
     }
 
     public async Task<ResponseModel> VerifyAsync(string token)
