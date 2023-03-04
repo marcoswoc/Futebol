@@ -3,48 +3,54 @@
 @using Futebol.Web.Services;
 @inject UserServiceClient UserService
 @inject NavigationManager NavigationManager
+@inject SweetAlertService Swal
 
 <PageTitle>Login</PageTitle>
 
-<main class="form-signin w-100 m-auto">
-    <EditForm Model="@loginModel" OnValidSubmit="@HandleValidSubmit">
-        <img class="mb-4 " src="../assets/person-badge.svg" alt="" width="80" height="80">
+<div class="card border border-5 secondary" style="width: 25rem; height: 30rem;">
+    <main class="form-signin w-100 m-auto card-body">
+        <EditForm Model="@loginModel" OnValidSubmit="@HandleValidSubmit">
+            <img class="mb-4 mt-3" src="../assets/person-badge.svg" alt="" width="80" height="80">
 
-      
-        <h1 class="h3 mb-4 fw-normal">Login</h1>
 
-        <div class="form-floating">
-            <InputText class="form-control" type="email" id="floatingInput" @bind-Value="loginModel.Email" placeholder="name@example.com" />
-            <label for="floatingInput">Email address</label>
-        </div>
+            <h1 class="h3 mb-4 fw-normal">Login</h1>
 
-        <div class="form-floating">
-            <InputText type="password" class="form-control" id="floatingPassword" @bind-Value="loginModel.Password" placeholder="Password" />
-            <label for="floatingPassword">Password</label>
-        </div>
+            <div class="form-floating">
+                <InputText class="form-control" type="email" id="floatingInput" @bind-Value="loginModel.Email" placeholder="name@example.com" />
+                <label for="floatingInput">Email</label>               
+            </div>
 
-        <div class="mt-4">
+            <div class="form-floating">
+                <InputText type="password" class="form-control" id="floatingPassword" @bind-Value="loginModel.Password" placeholder="Password" />
+                <label for="floatingPassword">Password</label>
+            </div>
 
-            @if (!loggingIn)
-            {
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-            }
-            else
-            {
-                <p>
-                    Logging in...
-                </p>
-            }
-        </div>
+            <div class="mt-4">
 
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-    </EditForm>
-</main>
+                @if (!loggingIn)
+                {
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                }
+                else
+                {
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                }
+            </div>
+            <div class="mt-4">
+                <DataAnnotationsValidator />
+                <ValidationSummary />                
+            </div>
+
+        </EditForm>
+    </main>
+</div>
 
 @code {
     private LoginModel loginModel = new();
     private bool loggingIn;
+    private string messageErro = null;
 
     private async Task HandleValidSubmit()
     {
@@ -53,7 +59,26 @@
 
         if (result.Success)
             NavigationManager.NavigateTo("/");
+        else
+            await Notificacao(result.Message);
+
 
         loggingIn = false;
+    }
+
+    private async Task Notificacao(string message)
+    {
+        var toast = Swal.Mixin(
+            new()
+                {
+                    Toast = true,
+                    Position = "top-end",
+                    ShowConfirmButton = false,
+                    Timer = 3000,
+                    TimerProgressBar = true
+                }
+        );
+
+        await toast.FireAsync(new() { Icon = "error", Title = message });
     }
 }
