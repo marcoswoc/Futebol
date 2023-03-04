@@ -6,32 +6,41 @@
 
 <PageTitle>Login</PageTitle>
 
-<h3>Login</h3>
+<main class="form-signin w-100 m-auto">
+    <EditForm Model="@loginModel" OnValidSubmit="@HandleValidSubmit">
+        <img class="mb-4 " src="../assets/person-badge.svg" alt="" width="80" height="80">
 
-<EditForm Model="@loginModel" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator/>
-    <ValidationSummary/>
+      
+        <h1 class="h3 mb-4 fw-normal">Login</h1>
 
-    <div class="mb-3">
-        <InputText class="form-control" id="Email" @bind-Value="loginModel.Email" placeholder="Email" />
-    </div>
+        <div class="form-floating">
+            <InputText class="form-control" type="email" id="floatingInput" @bind-Value="loginModel.Email" placeholder="name@example.com" />
+            <label for="floatingInput">Email address</label>
+        </div>
 
-    <div class="mb-3">
-        <InputText class="form-control" id="Password" @bind-Value="loginModel.Password" placeholder="Password" />
-    </div>
+        <div class="form-floating">
+            <InputText type="password" class="form-control" id="floatingPassword" @bind-Value="loginModel.Password" placeholder="Password" />
+            <label for="floatingPassword">Password</label>
+        </div>
 
-    @if (!loggingIn)
-    {
-        <button class="btn btn-primary" type="submit">Submit</button>
-    }
-    else
-    {
-        <p>
-            Logging in...
-        </p>
-    }
+        <div class="mt-4">
 
-</EditForm>
+            @if (!loggingIn)
+            {
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            }
+            else
+            {
+                <p>
+                    Logging in...
+                </p>
+            }
+        </div>
+
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+    </EditForm>
+</main>
 
 @code {
     private LoginModel loginModel = new();

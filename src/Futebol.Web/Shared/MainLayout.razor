@@ -1,25 +1,30 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<AuthorizeView>
+    <Authorized>
+        <div class="page">
+            <div class="sidebar">
+                <NavMenu />
+            </div>
 
-    <main>
-        <div class="top-row px-4">
-            <AuthorizeView>
-                <Authorized>
+            <main>
+                <div class="top-row px-4">
+
                     <text>Olá, @context.User.Identity.Name</text>
                     <NavLink class="nav-link" href="/logout">Logout</NavLink>
-                </Authorized>
-                <NotAuthorized>
-                    <NavLink class="nav-link" href="/login">Login</NavLink>
-                </NotAuthorized>
-            </AuthorizeView>
-        </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+                </div>
+
+                <article class="content px-4">
+                    @Body
+                </article>
+            </main>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="login-container text-center" >
+            <Futebol.Web.Pages.Login />
+        </div>
+        
+    </NotAuthorized>
+</AuthorizeView>
