@@ -27,7 +27,7 @@ public class RoundService : IRoundService
             return new() { Success = false, Message = "Já existe um Round Cadastrado para a data Inicio" };
 
         var entity = await _repository.CreateAsync(_mapper.Map<Round>(dto));
-        return new() { Data = _mapper.Map<RoundDto>(entity), Success = true };
+        return new() { Data = _mapper.Map<RoundDto>(entity), Success = true, Message = "Partida criada com sucesso!" };
     }
 
     public async Task<ResponseDto<IEnumerable<RoundDto>>> GetAllAsync()

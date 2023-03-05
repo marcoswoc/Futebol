@@ -1,0 +1,80 @@
+﻿@page "/round"
+@attribute [Authorize]
+@using Futebol.Shared.Models.Round;
+@using Futebol.Web.Services;
+@inject RoundServiceClient RoundService;
+@inject SweetAlertService Swal;
+
+<PageTitle>Round</PageTitle>
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+    <h3 class="mb-4">Partida</h3>
+
+    <div class="form-floating mb-3">
+        <InputDate id="startDate" class="form-control" @bind-Value="model.StartDate"/>
+        <label for="startDate">Data Inicial</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <InputDate id="endDate" class="form-control" @bind-Value="model.EndDate" />
+        <label for="endDate">Data Final</label>
+    </div>
+
+    <div class="mt-4">
+
+        @if (!load)
+        {
+            <button class=" btn btn-lg btn-outline-primary" type="submit">Criar</button>
+        }
+        else
+        {
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        }
+    </div>
+
+    <div class="mt-4">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+    </div>
+
+</EditForm>
+
+
+@code {
+    private CreateRoundModel model = new();
+    private bool load;
+
+    private async Task HandleValidSubmit()
+    {
+        load = true;
+        var result = await RoundService.CreateAsync(model);
+
+        if (result.Success)
+        {
+            await Notificacao(result.Message, "success");
+            model = new();
+        }
+
+        else
+            await Notificacao(result.Message, "error");
+
+        load = false;
+    }
+
+    private async Task Notificacao(string message, string icon)
+    {
+        var toast = Swal.Mixin(
+            new()
+                {
+                    Toast = true,
+                    Position = "top-end",
+                    ShowConfirmButton = false,
+                    Timer = 3000,
+                    TimerProgressBar = true
+                }
+        );
+
+        await toast.FireAsync(new() { Icon = icon, Title = message });
+    }
+}

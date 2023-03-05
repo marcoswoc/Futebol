@@ -21,5 +21,6 @@ builder.Services.AddSweetAlert2();
 builder.Services.AddScoped<CustomAuthenticationStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<CustomAuthenticationStateProvider>());
 builder.Services.AddScoped<UserServiceClient>();
+builder.Services.AddScoped<RoundServiceClient>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 await builder.Build().RunAsync();
