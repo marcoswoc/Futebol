@@ -1,12 +1,86 @@
 ﻿@page "/register"
-@attribute [Authorize]
+@attribute [Authorize(Roles = "admin")]
+@using Futebol.Shared.Models.User;
 @using Futebol.Web.Services;
-@inject UserServiceClient UserService
+@inject UserServiceClient UserService;
+@inject SweetAlertService Swal;
 
 <PageTitle>Register</PageTitle>
 
-<h3>Register</h3>
+
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+    <h3 class="mb-4">Register</h3>
+
+    <div class="form-floating mb-3">
+        <InputText id="userName" class="form-control" @bind-Value="model.UserName" />
+        <label for="userName">UserName</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <InputText id="email" type="email" class="form-control" @bind-Value="model.Email" />
+        <label for="email">Email</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <InputText id="password" type="password" class="form-control" @bind-Value="model.Password" />
+        <label for="password">Password</label>
+    </div>
+
+    <div class="mt-4">
+
+        @if (!load)
+        {
+            <button class=" btn btn-lg btn-outline-primary" type="submit">Criar</button>
+        }
+        else
+        {
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        }
+    </div>
+
+    
+    <div class="mt-4">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+    </div>
+</EditForm>
 
 @code {
+    private CreateUserModel model = new();
+    private bool load;
 
+    private async Task HandleValidSubmit()
+    {
+        load = true;
+        var result = await UserService.CreateUserAsync(model);
+
+        if (result.Success)
+        {
+            await Notificacao(result.Message, "success");
+            model = new();
+        }
+        
+        else
+            await Notificacao(result.Message, "error");
+
+        load = false;
+    }
+
+    private async Task Notificacao(string message, string icon)
+    {
+        var toast = Swal.Mixin(
+            new()
+                {
+                    Toast = true,
+                    Position = "top-end",
+                    ShowConfirmButton = false,
+                    Timer = 3000,
+                    TimerProgressBar = true
+                }
+        );
+
+        await toast.FireAsync(new() { Icon = icon, Title = message });
+    }
 }

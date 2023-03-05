@@ -21,6 +21,7 @@ public class UserServiceClient
 
     public async Task<ResponseModel> CreateUserAsync(CreateUserModel model)
     {
+        await SetTokenRquest();
         var response = await _httpClient.PostAsJsonAsync("user/register", model);
         var result = await response.Content.ReadFromJsonAsync<ResponseModel>();        
         return result;
@@ -60,5 +61,13 @@ public class UserServiceClient
         var response = await _httpClient.PostAsJsonAsync("user/reset-password", model);
         var result = await response.Content.ReadFromJsonAsync<ResponseModel>();
         return result;
+    }
+
+    private async Task SetTokenRquest()
+    {
+        var token = await _tokenService.GetTokenAsync();
+
+        if (token is not null && token.ValidTo > DateTime.Now)
+            _httpClient.DefaultRequestHeaders.Authorization = new("Bearer", $"{token.Token}");
     }
 }
