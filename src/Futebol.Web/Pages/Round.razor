@@ -1,5 +1,5 @@
 ﻿@page "/round"
-@attribute [Authorize]
+@attribute [Authorize(Roles = "admin")]
 @using Futebol.Shared.Models.Round;
 @using Futebol.Web.Services;
 @inject RoundServiceClient RoundService;
@@ -10,7 +10,7 @@
     <h3 class="mb-4">Partida</h3>
 
     <div class="form-floating mb-3">
-        <InputDate id="startDate" class="form-control" @bind-Value="model.StartDate"/>
+        <InputDate id="startDate" class="form-control" @bind-Value="model.StartDate" />
         <label for="startDate">Data Inicial</label>
     </div>
 
@@ -21,7 +21,7 @@
 
     <div class="mt-4">
 
-        @if (!load)
+        @if (!loadModel)
         {
             <button class=" btn btn-lg btn-outline-primary" type="submit">Criar</button>
         }
@@ -40,26 +40,84 @@
 
 </EditForm>
 
+<div class="m-5">
+    @if (rounds.Any())
+    {
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Data Inicio</th>
+                    <th scope="col">Data Fim</th>
+                    <th scope="col">Ativo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var round in rounds)
+                {
+
+                    <tr>
+                        <th scope="row">@round.Number</th>
+                        <td>@round.StartDate.ToString("d")</td>
+                        <td>@round.EndDate.ToString("d")</td>
+                        <td>@round.IsActive</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    }
+
+</div>
+
 
 @code {
+    private List<RoundModel> rounds = new();
     private CreateRoundModel model = new();
-    private bool load;
+    private bool loadModel;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetAllRoundsAsyn();
+    }
+
+    private async Task GetAllRoundsAsyn()
+    {
+        var result = await RoundService.GetAllAsync();    
+
+        if (result.Success)
+        {
+            rounds = result.Data.ToList();
+        }
+        else
+        {
+            await Notificacao("Erro ao obter dados", "error");
+        }
+
+    }
+
 
     private async Task HandleValidSubmit()
     {
-        load = true;
+        loadModel = true;
         var result = await RoundService.CreateAsync(model);
 
         if (result.Success)
         {
             await Notificacao(result.Message, "success");
             model = new();
+            await GetAllRoundsAsyn();
         }
-
         else
             await Notificacao(result.Message, "error");
 
-        load = false;
+        loadModel = false;
     }
 
     private async Task Notificacao(string message, string icon)
