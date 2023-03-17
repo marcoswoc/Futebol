@@ -1,0 +1,50 @@
+﻿@page "/votos"
+@using Futebol.Shared.Models.Player;
+@inject PlayerServiceClient PlayerService;
+@inject SweetAlertService Swal;
+
+
+
+<PageTitle>Votos</PageTitle>
+<h3 class="mb-4">Votos</h3>
+
+
+@if (players.Any())
+{
+
+}
+
+
+@code {
+    private List<PlayerModel> players = new();
+
+    private async Task GetAllPlayersAsync()
+    {
+        var result = await PlayerService.GetAllAsync();
+
+        if (result.Success)
+        {
+            players = result.Data.ToList();
+        }
+        else
+        {
+            await Notificacao("Erro ao obter dados", "error");
+        }
+    }
+
+    private async Task Notificacao(string message, string icon)
+    {
+        var toast = Swal.Mixin(
+            new()
+                {
+                    Toast = true,
+                    Position = "top-end",
+                    ShowConfirmButton = false,
+                    Timer = 3000,
+                    TimerProgressBar = true
+                }
+        );
+
+        await toast.FireAsync(new() { Icon = icon, Title = message });
+    }
+}

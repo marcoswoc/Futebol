@@ -8,7 +8,27 @@
 <PageTitle>Register</PageTitle>
 
 
-<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+<EditForm Model="@model" OnInvalidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator/>
+    <MudGrid>
+        <MudItem>
+            <MudCard Elevation="10">                
+                <MudCardContent>                    
+                    <MudTextField Label="User Name" @bind-Value="model.UserName" For="@(()=> model.UserName)" />
+                    <MudTextField Label="Email" @bind-Value="model.Email" For="@(()=> model.Email)" Class="mt-3"/>
+                    <MudTextField Label="Password" @bind-Value="model.Password" For="@(()=> model.Password)" Class="mt-3"/>
+
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" >Registrar</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>        
+    </MudGrid>
+</EditForm>
+
+
+@*<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
     <h3 class="mb-4">Register</h3>
 
     <div class="form-floating mb-3">
@@ -45,7 +65,7 @@
         <DataAnnotationsValidator />
         <ValidationSummary />
     </div>
-</EditForm>
+</EditForm>*@
 
 @code {
     private CreateUserModel model = new();

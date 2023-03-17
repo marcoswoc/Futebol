@@ -7,13 +7,15 @@ using Futebol.Web.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["APIBaseAddress"]) });
+builder.Services.AddMudServices();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddSweetAlert2();
@@ -22,5 +24,6 @@ builder.Services.AddScoped<CustomAuthenticationStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<CustomAuthenticationStateProvider>());
 builder.Services.AddScoped<UserServiceClient>();
 builder.Services.AddScoped<RoundServiceClient>();
+builder.Services.AddScoped<PlayerServiceClient>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 await builder.Build().RunAsync();

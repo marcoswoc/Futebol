@@ -7,7 +7,21 @@
 
 <PageTitle>Login</PageTitle>
 
-<div class="card border border-5 secondary" style="width: 25rem; height: 30rem;">
+
+
+<MudCard Elevation="10" Class="pa-8" Style="width:350px;">
+    <MudCardContent >
+        <MudText Align="Align.Center" Typo="Typo.h5">Login</MudText>
+        <MudTextField Label="Email" Variant="Variant.Outlined" @bind-Value="@loginModel.Email" />
+        <MudTextField Label="Senha" InputType="InputType.Password" Variant="Variant.Outlined" @bind-Value="@loginModel.Password" />
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit">Entrar</MudButton>
+    </MudCardActions>
+</MudCard>
+
+
+@*<div class="card border border-5 secondary" style="width: 25rem; height: 30rem;">
     <main class="form-signin w-100 m-auto card-body">
         <EditForm Model="@loginModel" OnValidSubmit="@HandleValidSubmit">
             <img class="mb-4 mt-3" src="../assets/person-badge.svg" alt="" width="80" height="80">
@@ -17,7 +31,7 @@
 
             <div class="form-floating">
                 <InputText class="form-control" type="email" id="floatingInput" @bind-Value="loginModel.Email" placeholder="name@example.com" />
-                <label for="floatingInput">Email</label>               
+                <label for="floatingInput">Email</label>
             </div>
 
             <div class="form-floating">
@@ -40,16 +54,17 @@
             </div>
             <div class="mt-4">
                 <DataAnnotationsValidator />
-                <ValidationSummary />                
+                <ValidationSummary />
             </div>
 
         </EditForm>
     </main>
-</div>
+</div>*@
 
 @code {
     private LoginModel loginModel = new();
     private bool loggingIn;
+
     private async Task HandleValidSubmit()
     {
         loggingIn = true;

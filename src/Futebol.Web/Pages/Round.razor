@@ -40,41 +40,39 @@
 
 </EditForm>
 
-<div class="m-5">
-    @if (rounds.Any())
-    {
-        <table class="table mt-5">
-            <thead>
+@if (rounds.Any())
+{
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Data Inicio</th>
+                <th scope="col">Data Fim</th>
+                <th scope="col">Ativo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var round in rounds)
+            {
+
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Data Inicio</th>
-                    <th scope="col">Data Fim</th>
-                    <th scope="col">Ativo</th>
+                    <th scope="row">@round.Number</th>
+                    <td>@round.StartDate.ToString("d")</td>
+                    <td>@round.EndDate.ToString("d")</td>
+                    <td>@(round.IsActive ? "Ativo" : "Inativo")</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var round in rounds)
-                {
 
-                    <tr>
-                        <th scope="row">@round.Number</th>
-                        <td>@round.StartDate.ToString("d")</td>
-                        <td>@round.EndDate.ToString("d")</td>
-                        <td>@round.IsActive</td>
-                    </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+}
 
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    }
-
-</div>
 
 
 @code {
@@ -89,7 +87,7 @@
 
     private async Task GetAllRoundsAsyn()
     {
-        var result = await RoundService.GetAllAsync();    
+        var result = await RoundService.GetAllAsync();
 
         if (result.Success)
         {
