@@ -7,7 +7,7 @@
 <AuthorizeView>
     <Authorized>
         <MudLayout>
-            <MudAppBar Elevation="24" >
+            <MudAppBar>
                 <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
                 <MudSpacer />
                 <MudText>Olá, @context.User.Identity.Name</MudText>
@@ -20,15 +20,15 @@
                 <NavMenu />
             </MudDrawer>
             <MudMainContent>
-                <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="my-12 pt-12">
-                    <MudCard Elevation="24" Class="d-flex justify-center flex-grow-1 gap-4 pa-12">
+                <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="pt-8" >
+                    <MudCard Elevation="24" Class="d-flex justify-center flex-grow-1 gap-4 pa-12" style="height:85vh;">
                         @Body
-                    </MudCard>                    
+                    </MudCard>
                 </MudContainer>
             </MudMainContent>
         </MudLayout>
     </Authorized>
-    <NotAuthorized>        
+    <NotAuthorized>
         <MudLayout>
             <MudMainContent>
                 <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex justify-center align-center" style="height:80vh;">
