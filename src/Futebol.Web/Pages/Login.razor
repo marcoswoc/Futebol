@@ -7,59 +7,26 @@
 
 <PageTitle>Login</PageTitle>
 
+<EditForm Model="@loginModel" OnValidSubmit="HandleValidSubmit">
+    <MudCard Elevation="10" Class="pa-8" Style="width:350px;">
+        <MudCardContent>
+            <MudText Align="Align.Center" Typo="Typo.h5">Login</MudText>
+            <MudTextField Label="Email" Variant="Variant.Outlined" @bind-Value="@loginModel.Email" For="@(() => loginModel.Email)" />
+            <MudTextField Label="Senha" InputType="InputType.Password" Variant="Variant.Outlined" @bind-Value="@loginModel.Password" For="@(() => loginModel.Password)" />
+        </MudCardContent>
+        <MudCardActions>
+            @if (loggingIn is false)
+            {
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Entrar</MudButton>
+            }
+            else
+            {
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            }
 
-
-<MudCard Elevation="10" Class="pa-8" Style="width:350px;">
-    <MudCardContent >
-        <MudText Align="Align.Center" Typo="Typo.h5">Login</MudText>
-        <MudTextField Label="Email" Variant="Variant.Outlined" @bind-Value="@loginModel.Email" />
-        <MudTextField Label="Senha" InputType="InputType.Password" Variant="Variant.Outlined" @bind-Value="@loginModel.Password" />
-    </MudCardContent>
-    <MudCardActions>
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit">Entrar</MudButton>
-    </MudCardActions>
-</MudCard>
-
-
-@*<div class="card border border-5 secondary" style="width: 25rem; height: 30rem;">
-    <main class="form-signin w-100 m-auto card-body">
-        <EditForm Model="@loginModel" OnValidSubmit="@HandleValidSubmit">
-            <img class="mb-4 mt-3" src="../assets/person-badge.svg" alt="" width="80" height="80">
-
-
-            <h1 class="h3 mb-4 fw-normal">Login</h1>
-
-            <div class="form-floating">
-                <InputText class="form-control" type="email" id="floatingInput" @bind-Value="loginModel.Email" placeholder="name@example.com" />
-                <label for="floatingInput">Email</label>
-            </div>
-
-            <div class="form-floating">
-                <InputText type="password" class="form-control" id="floatingPassword" @bind-Value="loginModel.Password" placeholder="Password" />
-                <label for="floatingPassword">Password</label>
-            </div>
-
-            <div class="mt-4">
-
-                @if (!loggingIn)
-                {
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-                }
-                else
-                {
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                }
-            </div>
-            <div class="mt-4">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-            </div>
-
-        </EditForm>
-    </main>
-</div>*@
+        </MudCardActions>
+    </MudCard>
+</EditForm>
 
 @code {
     private LoginModel loginModel = new();
@@ -82,7 +49,7 @@
     private async Task Notificacao(string message)
     {
         var toast = Swal.Mixin(
-            new()
+                new()
                 {
                     Toast = true,
                     Position = "top-end",
