@@ -1,16 +1,20 @@
 ﻿@page "/register"
 @attribute [Authorize(Roles = "admin")]
+@using Futebol.Shared.Models.Player;
 @using Futebol.Shared.Models.User;
+@using Futebol.Shared.Models;
 @using Futebol.Web.Services;
 @inject UserServiceClient UserService;
+@inject PlayerServiceClient PlayerService;
 @inject SweetAlertService Swal;
 
 <PageTitle>Register</PageTitle>
 
-<EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <MudGrid Justify="Justify.Center">
-        <MudItem xs="12" sm="12">
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" sm="12">
+        <EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
             <MudCard Elevation="10">
                 <MudCardHeader Class="pb-2">
                     <CardHeaderContent>
@@ -20,10 +24,10 @@
                 <MudCardContent Class="pb-4 pl-8 pr-8 pt-2">
                     <MudGrid>
                         <MudItem xs="12" sm="6">
-                            <MudTextField Label="User Name" @bind-Value="model.UserName" For="@(()=> model.UserName)"  />
+                            <MudTextField Label="User Name" @bind-Value="model.UserName" For="@(()=> model.UserName)" />
                         </MudItem>
                         <MudItem xs="12" sm="6">
-                            <MudTextField Label="Email" @bind-Value="model.Email" For="@(()=> model.Email)"/>
+                            <MudTextField Label="Email" @bind-Value="model.Email" For="@(()=> model.Email)" />
                         </MudItem>
                         <MudItem xs="12" sm="6">
                             <MudTextField Label="Password" @bind-Value="model.Password" InputType="InputType.Password" For="@(()=> model.Password)" />
@@ -32,7 +36,7 @@
                             <MudTextField Label="Confirm Password" @bind-Value="model.ConfirmPassword" InputType="InputType.Password" For="@(()=> model.ConfirmPassword)" />
                         </MudItem>
                     </MudGrid>
-                    
+
                 </MudCardContent>
                 <MudCardActions Class="pb-4 pl-8 pr-8">
                     @if (load is false)
@@ -46,13 +50,43 @@
                     }
                 </MudCardActions>
             </MudCard>
-        </MudItem>
-    </MudGrid>
-</EditForm>
+        </EditForm>
+    </MudItem>
+
+    <MudItem xs="12" sm="12">
+        <MudTable Items="@players" Loading="@loadPlayers" FixedHeader="true" Height="400px">
+           <HeaderContent>
+               <MudTh>Nome</MudTh>
+               <MudTh>Email</MudTh>
+           </HeaderContent>
+           <RowTemplate>
+               <MudTd DataLabel="Nome">@context.Name</MudTd>
+               <MudTd DataLabel="Nome">@context.Email</MudTd>
+           </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+       </MudTable>
+    </MudItem>
+</MudGrid>
+
+
+
+
+
+
 
 @code {
     private CreateUserModel model = new();
+    private List<PlayerWithUserModel> players = new();
     private bool load;
+    private bool loadPlayers;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetPlayersAsync();
+    }
 
     private async Task HandleValidSubmit()
     {
@@ -63,8 +97,8 @@
         {
             await Notificacao(result.Message, "success");
             model = new();
+            await GetPlayersAsync();
         }
-
         else
             await Notificacao(result.Message, "error");
 
@@ -85,5 +119,21 @@
         );
 
         await toast.FireAsync(new() { Icon = icon, Title = message });
+    }
+
+    private async Task GetPlayersAsync()
+    {
+        loadPlayers = true;
+        var result = await PlayerService.GetAllPlayersWithUsersAsync();
+
+        if (result.Success)
+        {
+            await Notificacao(result.Message, "success");
+            players = result.Data.ToList();            
+        }
+        else
+            await Notificacao(result.Message, "error");
+
+        loadPlayers = false;
     }
 }

@@ -20,6 +20,12 @@ public class PlayerService : IPlayerService
         _mapper = mapper;
     }
 
+    public async Task<ResponseDto<IEnumerable<PlayerWithUserDto>>> GetAllPlayerWithUsarAsync()
+    {
+        var entities = await _repository.GetAllPlayersWithUsersAsync();
+        return new() { Data = _mapper.Map<IEnumerable<PlayerWithUserDto>>(entities), Success = true };
+    }
+
     public async Task<ResponseDto<IEnumerable<PlayerDto>>> GetAllAsync()
     {
         var entities = await _repository.GetAllAsync();

@@ -25,6 +25,14 @@ public class PlayerServiceClient
 
     }
 
+    public async Task<ResponseModel<IEnumerable<PlayerWithUserModel>>> GetAllPlayersWithUsersAsync()
+    {
+        await SetTokenRquest();
+        var response = await _httpClient.GetAsync("player/with-user");
+        var result = await response.Content.ReadFromJsonAsync<ResponseModel<IEnumerable<PlayerWithUserModel>>>();
+        return result;
+    }
+
     public async Task<ResponseModel<PlayerModel>> GetByIdAsync(Guid id)
     {
         await SetTokenRquest();

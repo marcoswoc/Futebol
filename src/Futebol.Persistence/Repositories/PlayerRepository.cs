@@ -8,6 +8,11 @@ public class PlayerRepository<TContext> : RepositoryBase<Player>, IPlayerReposit
     where TContext : DbContext
 {
     public PlayerRepository(TContext context) : base(context)
+    {        
+    }
+
+    public async Task<IEnumerable<Player>> GetAllPlayersWithUsersAsync()
     {
+        return await _context.Set<Player>().Include(x => x.User).ToListAsync();
     }
 }

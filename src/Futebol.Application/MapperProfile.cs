@@ -19,6 +19,8 @@ public class MapperProfile : Profile
         CreateMap<UpdatePlayerDto, UpdatePlayerModel>().ReverseMap();
         CreateMap<Domain.Entity.Player, PlayerDto>().ReverseMap();
         CreateMap<Domain.Entity.Player, UpdatePlayerDto>().ReverseMap();
+        CreateMap<PlayerWithUserModel, PlayerWithUserDto>().ReverseMap();
+        CreateMap<Domain.Entity.Player, PlayerWithUserDto>().ForMember(d => d.Email, opt => opt.MapFrom(s => s.User.Email)).ReverseMap();
 
         CreateMap<RoundDto, RoundModel>().ReverseMap();
         CreateMap<CreateRoundDto, CreateRoundModel>().ReverseMap();

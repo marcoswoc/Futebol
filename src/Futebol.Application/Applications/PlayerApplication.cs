@@ -21,6 +21,12 @@ public class PlayerApplication : IPlayerApplication
         _mapper = mapper;
     }
 
+    public async Task<ResponseModel<IEnumerable<PlayerWithUserModel>>> GetAllPlayersWithUsersAsync()
+    {
+        var dtos = await _playerService.GetAllPlayerWithUsarAsync();
+        return _mapper.Map<ResponseModel<IEnumerable<PlayerWithUserModel>>>(dtos);
+    }
+
     public async Task<ResponseModel<IEnumerable<PlayerModel>>> GetAllAsync()
     {
         var dtos = await _playerService.GetAllAsync();
