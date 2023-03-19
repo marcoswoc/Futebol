@@ -7,65 +7,48 @@
 
 <PageTitle>Register</PageTitle>
 
-
-<EditForm Model="@model" OnInvalidSubmit="HandleValidSubmit">
-    <DataAnnotationsValidator/>
-    <MudGrid>
-        <MudItem>
-            <MudCard Elevation="10">                
-                <MudCardContent>                    
-                    <MudTextField Label="User Name" @bind-Value="model.UserName" For="@(()=> model.UserName)" />
-                    <MudTextField Label="Email" @bind-Value="model.Email" For="@(()=> model.Email)" Class="mt-3"/>
-                    <MudTextField Label="Password" @bind-Value="model.Password" For="@(()=> model.Password)" Class="mt-3"/>
-
+<EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="12">
+            <MudCard Elevation="10">
+                <MudCardHeader Class="pb-2">
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5">Registrar</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="pb-4 pl-8 pr-8 pt-2">
+                    <MudGrid>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField Label="User Name" @bind-Value="model.UserName" For="@(()=> model.UserName)"  />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField Label="Email" @bind-Value="model.Email" For="@(()=> model.Email)"/>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField Label="Password" @bind-Value="model.Password" InputType="InputType.Password" For="@(()=> model.Password)" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField Label="Confirm Password" @bind-Value="model.ConfirmPassword" InputType="InputType.Password" For="@(()=> model.ConfirmPassword)" />
+                        </MudItem>
+                    </MudGrid>
+                    
                 </MudCardContent>
-                <MudCardActions>
-                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" >Registrar</MudButton>
+                <MudCardActions Class="pb-4 pl-8 pr-8">
+                    @if (load is false)
+                    {
+
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Registrar</MudButton>
+                    }
+                    else
+                    {
+                        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+                    }
                 </MudCardActions>
             </MudCard>
-        </MudItem>        
+        </MudItem>
     </MudGrid>
 </EditForm>
-
-
-@*<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
-    <h3 class="mb-4">Register</h3>
-
-    <div class="form-floating mb-3">
-        <InputText id="userName" class="form-control" @bind-Value="model.UserName" />
-        <label for="userName">UserName</label>
-    </div>
-
-    <div class="form-floating mb-3">
-        <InputText id="email" type="email" class="form-control" @bind-Value="model.Email" />
-        <label for="email">Email</label>
-    </div>
-
-    <div class="form-floating mb-3">
-        <InputText id="password" type="password" class="form-control" @bind-Value="model.Password" />
-        <label for="password">Password</label>
-    </div>
-
-    <div class="mt-4">
-
-        @if (!load)
-        {
-            <button class=" btn btn-lg btn-outline-primary" type="submit">Criar</button>
-        }
-        else
-        {
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        }
-    </div>
-
-    
-    <div class="mt-4">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-    </div>
-</EditForm>*@
 
 @code {
     private CreateUserModel model = new();
@@ -81,7 +64,7 @@
             await Notificacao(result.Message, "success");
             model = new();
         }
-        
+
         else
             await Notificacao(result.Message, "error");
 

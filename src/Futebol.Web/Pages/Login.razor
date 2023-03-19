@@ -8,11 +8,12 @@
 <PageTitle>Login</PageTitle>
 
 <EditForm Model="@loginModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator/>
     <MudCard Elevation="10" Class="pa-8" Style="width:350px;">
         <MudCardContent>
             <MudText Align="Align.Center" Typo="Typo.h5">Login</MudText>
             <MudTextField Label="Email" Variant="Variant.Outlined" @bind-Value="@loginModel.Email" For="@(() => loginModel.Email)" />
-            <MudTextField Label="Senha" InputType="InputType.Password" Variant="Variant.Outlined" @bind-Value="@loginModel.Password" For="@(() => loginModel.Password)" />
+            <MudTextField Label="Senha" InputType="InputType.Password" Variant="Variant.Outlined" @bind-Value="@loginModel.Password" For="@(() => loginModel.Password)"/>
         </MudCardContent>
         <MudCardActions>
             @if (loggingIn is false)
