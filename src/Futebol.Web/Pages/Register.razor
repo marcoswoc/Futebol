@@ -33,7 +33,7 @@
                             <MudTextField Label="Password" @bind-Value="model.Password" InputType="InputType.Password" For="@(()=> model.Password)" />
                         </MudItem>
                         <MudItem xs="12" sm="6">
-                            <MudTextField Label="Confirm Password" @bind-Value="model.ConfirmPassword" InputType="InputType.Password" For="@(()=> model.ConfirmPassword)" />
+                            <MudTextField Label="Confirm Password"  @bind-Value="model.ConfirmPassword" InputType="InputType.Password" For="@(()=> model.ConfirmPassword)" />
                         </MudItem>
                     </MudGrid>
 
@@ -41,7 +41,6 @@
                 <MudCardActions Class="pb-4 pl-8 pr-8">
                     @if (load is false)
                     {
-
                         <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Registrar</MudButton>
                     }
                     else
@@ -54,7 +53,7 @@
     </MudItem>
 
     <MudItem xs="12" sm="12">
-        <MudTable Items="@players" Loading="@loadPlayers" FixedHeader="true" Height="400px">
+        <MudTable Items="@players" T="PlayerWithUserModel" Loading="@loadPlayers" FixedHeader="true" Height="350px">
            <HeaderContent>
                <MudTh>Nome</MudTh>
                <MudTh>Email</MudTh>
@@ -69,12 +68,6 @@
        </MudTable>
     </MudItem>
 </MudGrid>
-
-
-
-
-
-
 
 @code {
     private CreateUserModel model = new();
@@ -91,6 +84,7 @@
     private async Task HandleValidSubmit()
     {
         load = true;
+
         var result = await UserService.CreateUserAsync(model);
 
         if (result.Success)
