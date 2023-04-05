@@ -6,79 +6,66 @@
 @inject SweetAlertService Swal;
 
 <PageTitle>Round</PageTitle>
-<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
-    <h3 class="mb-4">Partida</h3>
 
-    <div class="form-floating mb-3">
-        <InputDate id="startDate" class="form-control" @bind-Value="model.StartDate" />
-        <label for="startDate">Data Inicial</label>
-    </div>
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" sm="12">
+        <EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <MudCard Elevation="10">
+                <MudCardHeader Class="pb-2">
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5">Partidas</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="pb-4 pl-8 pr-8 pt-2">
+                    <MudGrid>
+                        <MudItem xs="12" sm="6">
+                            <MudDatePicker Label="Data Inicio" @bind-Date="model.StartDate" For="@(() => model.StartDate)"/>                            
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudDatePicker Label="Data Final" @bind-Date="model.EndDate" For="@(() => model.EndDate)" />
+                        </MudItem>
+                    </MudGrid>
+                </MudCardContent>
+                <MudCardActions Class="pb-4 pl-8 pr-8">
+                    @if (loadModel is false)
+                    {
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Registrar</MudButton>
+                    }
+                    else
+                    {
+                        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+                    }
+                </MudCardActions>
+            </MudCard>
+        </EditForm>
+    </MudItem>
 
-    <div class="form-floating mb-3">
-        <InputDate id="endDate" class="form-control" @bind-Value="model.EndDate" />
-        <label for="endDate">Data Final</label>
-    </div>
-
-    <div class="mt-4">
-
-        @if (!loadModel)
-        {
-            <button class=" btn btn-lg btn-outline-primary" type="submit">Criar</button>
-        }
-        else
-        {
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        }
-    </div>
-
-    <div class="mt-4">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-    </div>
-
-</EditForm>
-
-@if (rounds.Any())
-{
-    <table class="table mt-5">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Data Inicio</th>
-                <th scope="col">Data Fim</th>
-                <th scope="col">Ativo</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var round in rounds)
-            {
-
-                <tr>
-                    <th scope="row">@round.Number</th>
-                    <td>@round.StartDate.ToString("d")</td>
-                    <td>@round.EndDate.ToString("d")</td>
-                    <td>@(round.IsActive ? "Ativo" : "Inativo")</td>
-                </tr>
-
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-    </div>
-}
-
-
+    <MudItem xs="12" sm="12">
+        <MudTable Items="@rounds" T="RoundModel" Loading="@loadRounds" FixedHeader="true" Height="350px">
+            <HeaderContent>
+                <MudTh>DataInicio</MudTh>
+                <MudTh>DataFim</MudTh>
+                <MudTh>Ativo</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="DataInicio">@context.StartDate</MudTd>
+                <MudTd DataLabel="DataFim">@context.EndDate</MudTd>
+                <MudTd DataLabel="Ativo">@context.IsActive</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </MudItem>
+</MudGrid>
 
 @code {
+
     private List<RoundModel> rounds = new();
     private CreateRoundModel model = new();
     private bool loadModel;
+    private bool loadRounds;
 
     protected override async Task OnInitializedAsync()
     {
@@ -87,6 +74,7 @@ else
 
     private async Task GetAllRoundsAsyn()
     {
+        loadRounds = true;
         var result = await RoundService.GetAllAsync();
 
         if (result.Success)
@@ -97,6 +85,8 @@ else
         {
             await Notificacao("Erro ao obter dados", "error");
         }
+
+        loadRounds = false;
 
     }
 
