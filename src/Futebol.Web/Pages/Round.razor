@@ -1,9 +1,7 @@
 ﻿@page "/round"
 @attribute [Authorize(Roles = "admin")]
-@using Futebol.Shared.Models.Round;
-@using Futebol.Web.Services;
 @inject RoundServiceClient RoundService;
-@inject SweetAlertService Swal;
+@inject NotificationService NotificationService
 
 <PageTitle>Round</PageTitle>
 
@@ -83,7 +81,7 @@
         }
         else
         {
-            await Notificacao("Erro ao obter dados", "error");
+            await NotificationService.Error("Erro ao obter dados");
         }
 
         loadRounds = false;
@@ -98,29 +96,13 @@
 
         if (result.Success)
         {
-            await Notificacao(result.Message, "success");
+            await NotificationService.Success(result.Message);
             model = new();
             await GetAllRoundsAsyn();
         }
         else
-            await Notificacao(result.Message, "error");
+            await NotificationService.Error(result.Message);
 
         loadModel = false;
-    }
-
-    private async Task Notificacao(string message, string icon)
-    {
-        var toast = Swal.Mixin(
-            new()
-                {
-                    Toast = true,
-                    Position = "top-end",
-                    ShowConfirmButton = false,
-                    Timer = 3000,
-                    TimerProgressBar = true
-                }
-        );
-
-        await toast.FireAsync(new() { Icon = icon, Title = message });
     }
 }

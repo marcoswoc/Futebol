@@ -1,9 +1,7 @@
 ﻿@page "/login"
-@using Futebol.Shared.Models.User;
-@using Futebol.Web.Services;
 @inject UserServiceClient UserService
 @inject NavigationManager NavigationManager
-@inject SweetAlertService Swal
+@inject NotificationService NotificationService;
 
 <PageTitle>Login</PageTitle>
 
@@ -41,25 +39,9 @@
         if (result.Success)
             NavigationManager.NavigateTo("/");
         else
-            await Notificacao(result.Message);
+            await NotificationService.Error(result.Message);
 
 
         loggingIn = false;
-    }
-
-    private async Task Notificacao(string message)
-    {
-        var toast = Swal.Mixin(
-                new()
-                {
-                    Toast = true,
-                    Position = "top-end",
-                    ShowConfirmButton = false,
-                    Timer = 3000,
-                    TimerProgressBar = true
-                }
-        );
-
-        await toast.FireAsync(new() { Icon = "error", Title = message });
     }
 }

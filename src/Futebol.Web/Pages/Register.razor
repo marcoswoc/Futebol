@@ -1,12 +1,8 @@
 ﻿@page "/register"
 @attribute [Authorize(Roles = "admin")]
-@using Futebol.Shared.Models.Player;
-@using Futebol.Shared.Models.User;
-@using Futebol.Shared.Models;
-@using Futebol.Web.Services;
 @inject UserServiceClient UserService;
 @inject PlayerServiceClient PlayerService;
-@inject SweetAlertService Swal;
+@inject NotificationService NotificationService;
 
 <PageTitle>Register</PageTitle>
 
@@ -89,30 +85,14 @@
 
         if (result.Success)
         {
-            await Notificacao(result.Message, "success");
+            await NotificationService.Success(result.Message);
             model = new();
             await GetPlayersAsync();
         }
         else
-            await Notificacao(result.Message, "error");
+            await NotificationService.Error(result.Message);
 
         load = false;
-    }
-
-    private async Task Notificacao(string message, string icon)
-    {
-        var toast = Swal.Mixin(
-            new()
-                {
-                    Toast = true,
-                    Position = "top-end",
-                    ShowConfirmButton = false,
-                    Timer = 3000,
-                    TimerProgressBar = true
-                }
-        );
-
-        await toast.FireAsync(new() { Icon = icon, Title = message });
     }
 
     private async Task GetPlayersAsync()
@@ -122,11 +102,11 @@
 
         if (result.Success)
         {
-            await Notificacao(result.Message, "success");
+            await NotificationService.Success(result.Message);
             players = result.Data.ToList();            
         }
         else
-            await Notificacao(result.Message, "error");
+            await NotificationService.Error(result.Message);
 
         loadPlayers = false;
     }
