@@ -41,7 +41,7 @@
                     }
                     else
                     {
-                        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+                        <Progress />
                     }
                 </MudCardActions>
             </MudCard>
@@ -82,7 +82,7 @@
         load = true;
 
         var result = await UserService.CreateUserAsync(model);
-
+        
         if (result.Success)
         {
             await NotificationService.Success(result.Message);
@@ -92,7 +92,7 @@
         else
             await NotificationService.Error(result.Message);
 
-        load = false;
+        load = false;        
     }
 
     private async Task GetPlayersAsync()
