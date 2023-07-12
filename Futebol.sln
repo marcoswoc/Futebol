@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Web.Api", "src\Fute
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Shared", "src\Futebol.Shared\Futebol.Shared.csproj", "{A41B6D72-47C1-4B1A-BD3E-0862566CBF51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Web.Blazor", "src\Futebol.Web.Blazor\Futebol.Web.Blazor.csproj", "{4B15AC37-CD86-4F50-84DE-115301AE209D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{A41B6D72-47C1-4B1A-BD3E-0862566CBF51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A41B6D72-47C1-4B1A-BD3E-0862566CBF51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A41B6D72-47C1-4B1A-BD3E-0862566CBF51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B15AC37-CD86-4F50-84DE-115301AE209D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B15AC37-CD86-4F50-84DE-115301AE209D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B15AC37-CD86-4F50-84DE-115301AE209D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B15AC37-CD86-4F50-84DE-115301AE209D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{CE275D73-62D9-48C4-AE75-CC451ED6237D} = {6C234B0C-8425-4378-8B89-1087EFF4B814}
 		{D967D9E0-4BBA-41CE-8EB8-FDBFBFA95535} = {6C234B0C-8425-4378-8B89-1087EFF4B814}
 		{A41B6D72-47C1-4B1A-BD3E-0862566CBF51} = {B123B305-BDAA-48F4-A7B8-5B0CD47357F2}
+		{4B15AC37-CD86-4F50-84DE-115301AE209D} = {6C234B0C-8425-4378-8B89-1087EFF4B814}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DB639571-243B-46E7-A8A0-0C00B513F24D}
