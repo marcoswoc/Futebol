@@ -8,8 +8,8 @@ public class FutebolDbContextNpgsql : FutebolDbContext
 { 
     public IConfiguration Configuration { get; set; }
 
-    public FutebolDbContextNpgsql(IConfiguration configuration, IHttpContextAccessor httpContext) 
-        : base(httpContext)
+    public FutebolDbContextNpgsql(IConfiguration configuration) 
+        : base()
     {
         Configuration = configuration;
     }
@@ -47,8 +47,7 @@ public class FutebolDbContextNpgsqlFactory : IDesignTimeDbContextFactory<Futebol
         var connectionString = configuration.GetConnectionString("FutebolDbContextNpgsql");
         var optionsBuilder = new DbContextOptionsBuilder<FutebolDbContextNpgsql>();
         optionsBuilder.UseNpgsql();
-        HttpContextAccessor http = new();
 
-        return new FutebolDbContextNpgsql(configuration, http);
+        return new FutebolDbContextNpgsql(configuration);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Futebol.Domain.Entity;
 using Futebol.Persistence.Events;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -8,12 +7,10 @@ using Microsoft.EntityFrameworkCore;
 namespace Futebol.Persistence.Contexts;
 public partial class FutebolDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
-    public IHttpContextAccessor HttpContext { get; }
 
-    public FutebolDbContext( IHttpContextAccessor httpContext)
+    public FutebolDbContext()
         : base()
     {
-        HttpContext = httpContext;
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
