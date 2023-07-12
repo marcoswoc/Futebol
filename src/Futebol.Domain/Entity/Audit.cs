@@ -1,7 +1,7 @@
 ﻿using Futebol.Infrastructure.Enums;
 using Futebol.Infrastructure.Models;
-using System.Text.Json;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Text.Json;
 
 namespace Futebol.Domain.Entity;
 public class Audit : IEntity

@@ -30,6 +30,6 @@ public class EmailService : IEmailService
     {
         var client = new SendGridClient(_configuration["SendGrid:ApiKey"]);
 
-        await client.SendEmailAsync(msg);        
+        await client.SendEmailAsync(msg);
     }
 }

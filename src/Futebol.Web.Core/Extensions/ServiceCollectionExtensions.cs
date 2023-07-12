@@ -13,7 +13,8 @@ public static class ServiceCollectionExtensions
         services.AddEndpointsApiExplorer();
         services.AddCors(opt =>
         {
-            opt.AddPolicy("CorsPolicy", builder => {
+            opt.AddPolicy("CorsPolicy", builder =>
+            {
                 builder.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod();
@@ -21,10 +22,10 @@ public static class ServiceCollectionExtensions
         });
 
         services.AddFutebolServices(configuration);
-        services.AddFutebolRepositories(configuration);
+        services.AddFutebolRepositories();
         services.AddIdentity(configuration);
         services.AddSwagger(configuration);
-        services.AddSeed(configuration);
+        services.AddSeed();
         services.AddAutoMapper(x => { x.AllowNullCollections = true; }, typeof(MapperProfile));
     }
 }

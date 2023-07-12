@@ -60,13 +60,13 @@ public class PlayerService : IPlayerService
 
         if (result.Item2 is false)
             return new() { Success = false, Message = "Erro Upload" };
-        
+
         var player = (await _repository.FindExpressionAsync(x => x.User.Email == userEmail)).FirstOrDefault();
-        
+
         if (player is not null)
             player.ImageUrl = result.Item1;
 
-        await _repository.UpdateAsync(player);       
+        await _repository.UpdateAsync(player);
 
         return new() { Data = result.Item1, Success = true };
     }

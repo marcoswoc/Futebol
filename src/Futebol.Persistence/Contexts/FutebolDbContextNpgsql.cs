@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
 namespace Futebol.Persistence.Contexts;
 public class FutebolDbContextNpgsql : FutebolDbContext
-{ 
+{
     public IConfiguration Configuration { get; set; }
 
-    public FutebolDbContextNpgsql(IConfiguration configuration) 
+    public FutebolDbContextNpgsql(IConfiguration configuration)
         : base()
     {
         Configuration = configuration;
@@ -21,10 +20,10 @@ public class FutebolDbContextNpgsql : FutebolDbContext
         {
             optionsBuilder.UseNpgsql(Configuration.GetConnectionString("FutebolDbContextNpgsql"), opt =>
             {
-                
+
                 opt.EnableRetryOnFailure();
             });
-        }       
+        }
 
         base.OnConfiguring(optionsBuilder);
         optionsBuilder.UseLazyLoadingProxies();

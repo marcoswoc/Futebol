@@ -25,7 +25,7 @@ public partial class FutebolDbContext : IdentityDbContext<User, IdentityRole<Gui
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.HasSequence<int>("RoundSequence").StartsAt(1).IncrementsBy(1);
-        
+
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(typeof(FutebolDbContext).Assembly);
     }

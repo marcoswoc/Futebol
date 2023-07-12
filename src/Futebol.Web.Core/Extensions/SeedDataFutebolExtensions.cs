@@ -8,12 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Futebol.Web.Core.Extensions;
 public static class SeedDataFutebolExtensions
 {
-    public static void AddSeed(this IServiceCollection services, IConfiguration configuration)
+    public static void AddSeed(this IServiceCollection services)
     {
         var serviceProvider = services.BuildServiceProvider();
         var dbContext = serviceProvider.GetRequiredService<FutebolDbContext>();
         if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
-            dbContext.Database.Migrate();      
+            dbContext.Database.Migrate();
 
     }
 

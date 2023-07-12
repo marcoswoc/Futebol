@@ -17,7 +17,7 @@ public class PlayerController : ControllerBase
         _playerApplication = playerApplication;
     }
 
-    
+
     [HttpGet("with-user")]
     [Authorize(Roles = "admin")]
     public async Task<ActionResult<ResponseModel<IEnumerable<PlayerWithUserModel>>>> GetAllPlayersWithUsersAsync()

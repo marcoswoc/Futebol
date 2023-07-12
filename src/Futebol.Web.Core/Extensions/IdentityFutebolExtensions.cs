@@ -48,6 +48,6 @@ public static class IdentityFutebolExtensions
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
             };
         });
-        
+
     }
 }

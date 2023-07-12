@@ -14,11 +14,11 @@ try
     var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseCors("CorsPolicy");    
+    app.UseCors("CorsPolicy");
     app.UseAuthentication();
     app.UseAuthorization();
     app.UseMiddleware<ErrorHandlerMiddleware>();
-    app.MapControllers();    
+    app.MapControllers();
     app.Run();
 }
 catch (Exception ex)

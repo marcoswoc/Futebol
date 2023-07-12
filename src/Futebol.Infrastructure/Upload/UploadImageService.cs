@@ -19,7 +19,7 @@ public class UploadImageService : IUploadImage
         var ext = model.ContentType.Split("/")[1];
         fileName = $"{fileName}.{ext}";
         var bucketName = _configuration["Amazon:Bucket"];
-        PutObjectResponse? response = null;        
+        PutObjectResponse? response = null;
 
         using var client = new AmazonS3Client(_configuration["Amazon:AccessKey"], _configuration["Amazon:AccessSecret"], Amazon.RegionEndpoint.SAEast1);
         var exists = await client.ListObjectsAsync(bucketName);

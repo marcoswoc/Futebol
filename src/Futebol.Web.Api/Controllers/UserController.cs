@@ -8,7 +8,7 @@ namespace Futebol.Web.Api.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    private readonly IUserApplication  _userApplication;
+    private readonly IUserApplication _userApplication;
 
     public UserController(IUserApplication userApplication)
     {

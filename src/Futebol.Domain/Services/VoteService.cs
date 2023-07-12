@@ -114,7 +114,7 @@ public class VoteService : IVoteService
             {
                 Player = _mapper.Map<PlayerDto>(userMedia.Key),
                 VoteAttributes = attributes
-            };         
+            };
 
             list.Add(avarage);
         }
