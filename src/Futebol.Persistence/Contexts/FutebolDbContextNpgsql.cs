@@ -1,16 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
 namespace Futebol.Persistence.Contexts;
 public class FutebolDbContextNpgsql : FutebolDbContext
 {
-    public IConfiguration Configuration { get; set; }
-
-    public FutebolDbContextNpgsql(IConfiguration configuration)
-        : base()
+    public FutebolDbContextNpgsql(IConfiguration configuration, IHttpContextAccessor httpContext)
+        : base(httpContext, configuration)
     {
-        Configuration = configuration;
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -46,7 +44,8 @@ public class FutebolDbContextNpgsqlFactory : IDesignTimeDbContextFactory<Futebol
         var connectionString = configuration.GetConnectionString("FutebolDbContextNpgsql");
         var optionsBuilder = new DbContextOptionsBuilder<FutebolDbContextNpgsql>();
         optionsBuilder.UseNpgsql();
+        var httpContext = new HttpContextAccessor();        
 
-        return new FutebolDbContextNpgsql(configuration);
+        return new FutebolDbContextNpgsql(configuration, httpContext);
     }
 }
