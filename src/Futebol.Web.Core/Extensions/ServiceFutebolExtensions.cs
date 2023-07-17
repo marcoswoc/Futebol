@@ -4,13 +4,12 @@ using Futebol.Domain.Services;
 using Futebol.Domain.Services.Interfaces;
 using Futebol.Infrastructure.Email;
 using Futebol.Infrastructure.Upload;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Futebol.Web.Core.Extensions;
 public static class ServiceFutebolExtensions
 {
-    public static void AddFutebolServices(this IServiceCollection services, IConfiguration configuration)
+    public static void AddFutebolServices(this IServiceCollection services)
     {
         services.AddScoped<IPlayerApplication, PlayerApplication>();
         services.AddScoped<IRoundApplication, RoundApplication>();
