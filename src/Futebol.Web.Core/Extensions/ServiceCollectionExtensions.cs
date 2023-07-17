@@ -8,23 +8,13 @@ public static class ServiceCollectionExtensions
     public static void AddFutebolCore(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton(configuration);
-
         services.AddControllers();
         services.AddEndpointsApiExplorer();
-        services.AddCors(opt =>
-        {
-            opt.AddPolicy("CorsPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-            });
-        });
-
-        services.AddFutebolServices(configuration);
+        services.AddCorsPolicy();
+        services.AddFutebolServices();
         services.AddFutebolRepositories();
         services.AddIdentity(configuration);
-        services.AddSwagger(configuration);
+        services.AddSwagger();
         services.AddSeed();
         services.AddAutoMapper(x => { x.AllowNullCollections = true; }, typeof(MapperProfile));
     }

@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 namespace Futebol.Web.Core.Extensions;
 public static class SwaggerFutebolExtenssions
 {
-    public static void AddSwagger(this IServiceCollection services, IConfiguration configuration)
+    public static void AddSwagger(this IServiceCollection services)
     {
         services.AddSwaggerGen(options =>
         {
