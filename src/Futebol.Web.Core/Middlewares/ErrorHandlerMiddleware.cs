@@ -24,18 +24,11 @@ public class ErrorHandlerMiddleware
             var response = context.Response;
             response.ContentType = "application/json";
 
-            switch (error)
+            response.StatusCode = error switch
             {
-                case KeyNotFoundException:
-                    // not found error
-                    response.StatusCode = (int)HttpStatusCode.NotFound;
-                    break;
-                default:
-                    // unhandled error
-                    response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    break;
-            }
-
+                KeyNotFoundException => (int)HttpStatusCode.NotFound,
+                _ => (int)HttpStatusCode.InternalServerError,
+            };
             var result = JsonSerializer.Serialize(new ResponseModel { Success = false, Message = error?.Message });
             await response.WriteAsync(result);
         }

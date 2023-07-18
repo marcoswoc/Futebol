@@ -10,8 +10,8 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton(configuration);
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        services.AddControllers();
-        services.AddEndpointsApiExplorer();
+        services.AddControllersWithViews();
+        services.AddRazorPages();
         services.AddCorsPolicy();
         services.AddFutebolServices();
         services.AddFutebolRepositories();
