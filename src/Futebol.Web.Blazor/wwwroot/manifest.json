@@ -1,6 +1,6 @@
 {
-  "name": "Futebol.Web.Blazor",
-  "short_name": "Futebol.Web.Blazor",
+  "name": "Futebol",
+  "short_name": "Futebol",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",

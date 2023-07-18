@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Web.Api", "src\Fute
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Shared", "src\Futebol.Shared\Futebol.Shared.csproj", "{A41B6D72-47C1-4B1A-BD3E-0862566CBF51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Web.Blazor", "src\Futebol.Web.Blazor\Futebol.Web.Blazor.csproj", "{4B15AC37-CD86-4F50-84DE-115301AE209D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Web.Blazor", "src\Futebol.Web.Blazor\Futebol.Web.Blazor.csproj", "{4B15AC37-CD86-4F50-84DE-115301AE209D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
