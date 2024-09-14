@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Domain", "Futebol.Domain\Futebol.Domain.csproj", "{B5DA586B-47D2-48B7-8108-5EA4B0AE7254}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Domain", "Futebol.Domain\Futebol.Domain.csproj", "{B5DA586B-47D2-48B7-8108-5EA4B0AE7254}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Infrastructure", "Futebol.Infrastructure\Futebol.Infrastructure.csproj", "{8593599E-1CE5-453C-BC29-76B2CF877CA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Infrastructure", "Futebol.Infrastructure\Futebol.Infrastructure.csproj", "{8593599E-1CE5-453C-BC29-76B2CF877CA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Application", "Futebol.Application\Futebol.Application.csproj", "{A5968B3E-F1E9-4EE4-A6B8-AD81634FA0E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Application", "Futebol.Application\Futebol.Application.csproj", "{A5968B3E-F1E9-4EE4-A6B8-AD81634FA0E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Shared", "Futebol.Shared\Futebol.Shared.csproj", "{30BF425A-B88E-4048-8A26-3CE6FEB23CD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Shared", "Futebol.Shared\Futebol.Shared.csproj", "{30BF425A-B88E-4048-8A26-3CE6FEB23CD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futebol.Api", "Futebol.Api\Futebol.Api.csproj", "{4E663EF9-C1CC-445A-939C-59BBA17D1AE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Api", "Futebol.Api\Futebol.Api.csproj", "{4E663EF9-C1CC-445A-939C-59BBA17D1AE6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Futebol.Web", "Futebol.Web\Futebol.Web.csproj", "{98B9A6A9-2C84-4E50-98B7-1410DA46EA2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4E663EF9-C1CC-445A-939C-59BBA17D1AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E663EF9-C1CC-445A-939C-59BBA17D1AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E663EF9-C1CC-445A-939C-59BBA17D1AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B9A6A9-2C84-4E50-98B7-1410DA46EA2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B9A6A9-2C84-4E50-98B7-1410DA46EA2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B9A6A9-2C84-4E50-98B7-1410DA46EA2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B9A6A9-2C84-4E50-98B7-1410DA46EA2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
