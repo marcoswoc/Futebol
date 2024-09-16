@@ -1,6 +1,11 @@
 using Futebol.Api.Extensions;
+using Futebol.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services
+    .AddInfrastructure(builder.Configuration);
+
 builder.Services.ConfigureCors();
 
 builder.Services.AddEndpointsApiExplorer();
