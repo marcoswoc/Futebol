@@ -14,4 +14,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Futebol.Infrastructure\Futebol.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
