@@ -1,13 +1,12 @@
+using Futebol.Api;
 using Futebol.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
+    .AddPresentation()
     .AddInfrastructure(builder.Configuration);
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
