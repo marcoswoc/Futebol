@@ -1,5 +1,6 @@
 ﻿using Futebol.Application.Abstractions.Data;
 using Futebol.Infrastructure.Database;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +13,10 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration) =>
         services
-            .AddDatabase(configuration);
+            .AddDatabase(configuration)
+            .AddAuthenticationInternal()
+            .AddAuthorizationInternal()
+            .AddIdentityEndpoints();
 
 
     private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
@@ -25,6 +29,29 @@ public static class DependencyInjection
                     npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Default)));
 
         services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
+
+        return services;
+    }
+
+    private static IServiceCollection AddAuthenticationInternal(this IServiceCollection services)
+    {
+        services.AddAuthentication().AddJwtBearer();
+
+        return services;
+    }
+
+    private static IServiceCollection AddAuthorizationInternal(this IServiceCollection services)
+    {
+        services.AddAuthorization();
+
+        return services;
+    }
+
+    private static IServiceCollection AddIdentityEndpoints(this IServiceCollection services)
+    {
+        services
+            .AddIdentityApiEndpoints<IdentityUser>()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
         return services;
     }
