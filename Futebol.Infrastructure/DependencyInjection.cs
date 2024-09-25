@@ -1,6 +1,7 @@
 ﻿using Futebol.Application.Abstractions.Data;
 using Futebol.Infrastructure.Database;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -13,11 +14,18 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration) =>
         services
+            .AddServices()
             .AddDatabase(configuration)
             .AddAuthenticationInternal()
             .AddAuthorizationInternal()
             .AddIdentityEndpoints();
 
+    private static IServiceCollection AddServices(this IServiceCollection service)
+    {
+        service.AddSingleton<IEmailSender, MockEmailSender>();
+
+        return service;
+    }
 
     private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
