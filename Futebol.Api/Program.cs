@@ -1,7 +1,7 @@
 using Futebol.Api;
+using Futebol.Api.Endpoints;
 using Futebol.Api.Extensions;
 using Futebol.Infrastructure;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +20,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
-app.MapGet("/", () => "Hello World!");
-app.MapIdentityApi<IdentityUser>();
+app.MapEndpoints();
 
 await app.RunAsync();
