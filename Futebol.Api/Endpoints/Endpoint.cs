@@ -1,4 +1,4 @@
-﻿using Futebol.Api.Endpoints.Usuario;
+﻿using Futebol.Api.Endpoints.Account;
 using Microsoft.AspNetCore.Identity;
 
 namespace Futebol.Api.Endpoints;

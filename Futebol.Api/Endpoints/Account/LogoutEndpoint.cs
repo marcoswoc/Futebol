@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Futebol.Api.Endpoints.Usuario;
+namespace Futebol.Api.Endpoints.Account;
 
 internal sealed class LogoutEndpoint : IEndpoint
 {
