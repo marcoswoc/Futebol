@@ -19,7 +19,8 @@ internal static class Endpoint
 
         endpoints.MapGroup("v1/identity")
             .WithTags("Identity")
-            .MapEndpoint<LogoutEndpoint>();
+            .MapEndpoint<LogoutEndpoint>()
+            .MapEndpoint<GetRolesEndpoint>();
     }
 
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)

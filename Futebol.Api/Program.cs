@@ -17,6 +17,7 @@ if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
 }
 
+app.UseCors("futebolApi");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
