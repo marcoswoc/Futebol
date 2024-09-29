@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Futebol.Infrastructure\Futebol.Infrastructure.csproj" />
+    <ProjectReference Include="..\Futebol.Shared\Futebol.Shared.csproj" />
   </ItemGroup>
 
 </Project>
