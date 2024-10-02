@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
 
-namespace Futebol.Infrastructure;
+namespace Futebol.Api;
 
 public class MockEmailSender : IEmailSender
 {

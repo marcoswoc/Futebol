@@ -38,11 +38,11 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
     public void NotifyAuthenticationStateChanged()
         => NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
 
-    private async Task<User?> GetUserAsync()
+    private async Task<UserModel?> GetUserAsync()
     {
         try
         {
-            return await _client.GetFromJsonAsync<User?>("v1/identity/manage/info");
+            return await _client.GetFromJsonAsync<UserModel?>("v1/identity/manage/info");
         }
         catch
         {
@@ -50,7 +50,7 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
         }
     }
 
-    private async Task<List<Claim>> GetClaimsAsync(User user)
+    private async Task<List<Claim>> GetClaimsAsync(UserModel user)
     {
         var claims = new List<Claim>()
         {
@@ -65,11 +65,11 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
             .Select(x => new Claim(x.Key, x.Value))
         );
 
-        RoleClaim[]? roles;
+        RoleClaimModel[]? roles;
 
         try
         {
-            roles = await _client.GetFromJsonAsync<RoleClaim[]>("v1/identity/roles");
+            roles = await _client.GetFromJsonAsync<RoleClaimModel[]>("v1/identity/roles");
         }
         catch
         {

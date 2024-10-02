@@ -1,5 +1,5 @@
 ﻿namespace Futebol.Shared.Models.Account;
-public class User
+public class UserModel
 {
     public string Email { get; set; } = string.Empty;
     public bool IsEmailConfirmed { get; set; }

@@ -18,7 +18,7 @@ public class GetRolesEndpoint : IEndpoint
 
         var roles = identity
         .FindAll(identity.RoleClaimType)
-        .Select(c => new RoleClaim
+        .Select(c => new RoleClaimModel
         {
             Issuer = c.Issuer,
             OriginalIssuer = c.OriginalIssuer,
