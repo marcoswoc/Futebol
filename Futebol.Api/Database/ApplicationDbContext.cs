@@ -1,10 +1,9 @@
-﻿using Futebol.Application.Abstractions.Data;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Futebol.Infrastructure.Database;
+namespace Futebol.Api.Database;
 public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-    : IdentityDbContext(options), IApplicationDbContext
+    : IdentityDbContext(options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

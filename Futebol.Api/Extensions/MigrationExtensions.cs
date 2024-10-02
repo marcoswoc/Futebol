@@ -1,4 +1,4 @@
-﻿using Futebol.Infrastructure.Database;
+﻿using Futebol.Api.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Futebol.Api.Extensions;

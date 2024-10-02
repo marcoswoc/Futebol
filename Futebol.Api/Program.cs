@@ -1,13 +1,11 @@
 using Futebol.Api;
 using Futebol.Api.Endpoints;
 using Futebol.Api.Extensions;
-using Futebol.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddPresentation()
-    .AddInfrastructure(builder.Configuration);
+    .AddFutebolApi(builder.Configuration);
 
 var app = builder.Build();
 

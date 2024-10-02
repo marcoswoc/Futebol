@@ -1,4 +1,4 @@
-﻿namespace Futebol.Infrastructure.Database;
+﻿namespace Futebol.Api.Database;
 
 internal static class Schemas
 {
