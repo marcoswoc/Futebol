@@ -1,8 +1,10 @@
 ﻿using Futebol.Api.Database;
+using Futebol.Api.Entities.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace Futebol.Api;
 
@@ -16,7 +18,6 @@ public static class DependencyInjection
         .AddCrossOrigin()
         .AddEndpointsApiExplorer()
         .AddSwaggerGen()
-        .AddIdentityEndpoints()
         .AddServices();            
 
     public static IServiceCollection AddCrossOrigin(this IServiceCollection services)
@@ -49,16 +50,21 @@ public static class DependencyInjection
         string? connectionString = configuration.GetConnectionString("Database");
 
         services.AddDbContext<ApplicationDbContext>(
-            options => options
-                .UseNpgsql(connectionString, npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Default)));
+            options => options.UseNpgsql(connectionString));
+
+        services
+            .AddIdentityCore<User>()
+            .AddRoles<Role>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddApiEndpoints();
 
         return services;
     }
 
     private static IServiceCollection AddAuthenticationInternal(this IServiceCollection services)
     {
-        services.AddAuthentication().AddIdentityCookies();
+        services.AddAuthentication(IdentityConstants.ApplicationScheme)
+            .AddIdentityCookies();
 
         return services;
     }
@@ -66,15 +72,6 @@ public static class DependencyInjection
     private static IServiceCollection AddAuthorizationInternal(this IServiceCollection services)
     {
         services.AddAuthorization();
-
-        return services;
-    }
-
-    private static IServiceCollection AddIdentityEndpoints(this IServiceCollection services)
-    {
-        services
-            .AddIdentityApiEndpoints<IdentityUser>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
 
         return services;
     }
