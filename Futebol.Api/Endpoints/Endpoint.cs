@@ -1,4 +1,5 @@
 ﻿using Futebol.Api.Endpoints.Account;
+using Futebol.Api.Entities.Account;
 using Microsoft.AspNetCore.Identity;
 
 namespace Futebol.Api.Endpoints;
@@ -15,7 +16,7 @@ internal static class Endpoint
 
         endpoints.MapGroup("v1/identity")
             .WithTags("Identity")
-            .MapIdentityApi<IdentityUser>();
+            .MapIdentityApi<User>();
 
         endpoints.MapGroup("v1/identity")
             .WithTags("Identity")

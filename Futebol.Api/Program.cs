@@ -1,4 +1,5 @@
 using Futebol.Api;
+using Futebol.Api.Database;
 using Futebol.Api.Endpoints;
 using Futebol.Api.Extensions;
 
@@ -14,6 +15,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerWithUi();
     app.ApplyMigrations();
 }
+
+using var scope = app.Services.CreateScope();
+
+var seedService = scope.ServiceProvider.GetRequiredService<SeedService>();
+await seedService.SeedRolesAndUsersAsync();
 
 app.UseCors("futebolApi");
 app.UseAuthentication();
