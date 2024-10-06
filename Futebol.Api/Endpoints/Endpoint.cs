@@ -1,6 +1,5 @@
 ﻿using Futebol.Api.Endpoints.Account;
 using Futebol.Api.Entities.Account;
-using Microsoft.AspNetCore.Identity;
 
 namespace Futebol.Api.Endpoints;
 
