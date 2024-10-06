@@ -41,7 +41,7 @@ public static class DependencyInjection
     private static IServiceCollection AddServices(this IServiceCollection service)
     {
         service.AddSingleton<IEmailSender, MockEmailSender>();
-
+        service.AddScoped<SeedService>();
         return service;
     }
 
