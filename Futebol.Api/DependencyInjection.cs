@@ -1,5 +1,7 @@
 ﻿using Futebol.Api.Database;
 using Futebol.Api.Entities.Account;
+using Futebol.Api.Handlers;
+using Futebol.Shared.Handlers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +41,7 @@ public static class DependencyInjection
     private static IServiceCollection AddServices(this IServiceCollection service)
     {
         service.AddSingleton<IEmailSender, MockEmailSender>();
+        service.AddTransient<ITeamHandler, TeamHandler>();
         service.AddScoped<SeedService>();
         return service;
     }

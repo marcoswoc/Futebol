@@ -1,4 +1,5 @@
 ﻿using Futebol.Api.Endpoints.Account;
+using Futebol.Api.Endpoints.Team;
 using Futebol.Api.Entities.Account;
 
 namespace Futebol.Api.Endpoints;
@@ -12,6 +13,12 @@ internal static class Endpoint
         endpoints.MapGroup("/")
             .WithTags("Health Check")
             .MapGet("/", () => new { message = "OK" });
+
+        endpoints.MapGroup("v1/teams")
+            .WithTags("teams")
+            .RequireAuthorization()
+            .MapEndpoint<CreateTeamEndpoint>()
+            .MapEndpoint<GetAllTeamsEndpoint>();
 
         endpoints.MapGroup("v1/identity")
             .WithTags("Identity")

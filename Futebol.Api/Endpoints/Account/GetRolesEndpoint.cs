@@ -6,10 +6,10 @@ namespace Futebol.Api.Endpoints.Account;
 public class GetRolesEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-        => app.MapGet("/roles", Handle)
+        => app.MapGet("/roles", HandleAsync)
         .RequireAuthorization();
 
-    public static Task<IResult> Handle(ClaimsPrincipal user)
+    public static Task<IResult> HandleAsync(ClaimsPrincipal user)
     {
         if (user.Identity is null || !user.Identity.IsAuthenticated)
             return Task.FromResult(Results.Unauthorized());
