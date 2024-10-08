@@ -1,4 +1,5 @@
-﻿using Futebol.Api.Entities.Account;
+﻿using Futebol.Api.Entities;
+using Futebol.Api.Entities.Account;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,4 +12,6 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
+
+    public DbSet<Team> Teams { get; set; } = null!;
 }

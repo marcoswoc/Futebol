@@ -1,0 +1,29 @@
+﻿@page "/times"
+
+<MudText Typo="Typo.h3">Times</MudText>
+
+<div class="d-flex justify-end">
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.TwoTone.Add" Href="/times/adicionar">Novo time</MudButton>
+</div>
+
+<MudDataGrid Class="mt-4"
+             Items="@Teams"
+             Filterable="true"
+             QuickFilter="Filter"
+             Hideable="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Times</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="SearchTerm"
+                      Placeholder="Filtra..."
+                      Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      Immediate="true"
+                      IconSize="Size.Medium"
+                      Class="mt-0" />
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="x => x.Id" Title="#" />
+        <PropertyColumn Property="x => x.Name" Title="Time" />        
+    </Columns>
+</MudDataGrid>

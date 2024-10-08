@@ -1,0 +1,15 @@
+﻿@page "/times/adicionar"
+
+<MudText Typo="Typo.h3">Novo Time</MudText>
+<MudPaper Class="pa-8 mt-4">
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator />
+
+        <MudTextField Label="Nome"
+                      HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Name"
+                      For="@(() => InputModel.Name)" />
+
+        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Salvar</MudButton>
+    </EditForm>
+</MudPaper>

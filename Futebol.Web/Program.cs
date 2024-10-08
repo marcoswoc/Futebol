@@ -24,6 +24,8 @@ builder.Services.AddHttpClient("futebol", opt =>
     opt.BaseAddress = new Uri("https://localhost:7070");
 }).AddHttpMessageHandler<CookieHandler>();
 
+builder.Services.AddTransient<ITeamHandler, TeamHandler>();
+
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();
 
 await builder.Build().RunAsync();
