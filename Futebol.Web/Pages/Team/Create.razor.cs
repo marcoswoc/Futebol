@@ -27,11 +27,11 @@ public partial class Create : ComponentBase
             var result = await Handler.CreateAsync(InputModel);
             if (result.IsSucess)
             {
-                Snackbar.Add(result.Message, Severity.Success);
+                Snackbar.Add(result.Message ?? "", Severity.Success);
                 NavigationManager.NavigateTo("/");
             }
             else
-                Snackbar.Add(result.Message, Severity.Error);
+                Snackbar.Add(result.Message ?? "", Severity.Error);
         }
         catch (Exception ex)
         {

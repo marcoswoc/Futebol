@@ -7,4 +7,6 @@ public interface ITeamHandler
 {
     Task<Response<TeamModel?>> CreateAsync(CreateTeamRequest request);
     Task<PagedResponse<List<TeamModel>?>> GetAllAsync(GetAllTeamsRequest request);
+    Task<Response<TeamModel?>> GetByIdAsync(GetByIdTeamRequest request);
+    Task<Response<TeamModel?>> UpdateAsync(UpdateTeamRequest request);
 }

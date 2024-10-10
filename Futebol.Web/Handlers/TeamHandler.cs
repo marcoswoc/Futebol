@@ -21,4 +21,15 @@ public class TeamHandler(IHttpClientFactory httpClientFactory) : ITeamHandler
     public async Task<PagedResponse<List<TeamModel>?>> GetAllAsync(GetAllTeamsRequest request)
     => await _client.GetFromJsonAsync<PagedResponse<List<TeamModel>?>>(_api)
         ?? new(null, 400, "Não foi possível obter os times");
+
+    public async Task<Response<TeamModel?>> GetByIdAsync(GetByIdTeamRequest request)
+        => await _client.GetFromJsonAsync<Response<TeamModel?>>($"{_api}/{request.Id}")
+        ?? new(null, 400, "Não foi possível obter o time");
+
+    public async Task<Response<TeamModel?>> UpdateAsync(UpdateTeamRequest request)
+    {
+        var result = await _client.PutAsJsonAsync($"{_api}/{request.Id}", request);
+        return await result.Content.ReadFromJsonAsync<Response<TeamModel?>>()
+            ?? new(null, 400, "Falha ao atualizar o time");
+    }        
 }

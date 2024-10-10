@@ -24,6 +24,15 @@
     </ToolBarContent>
     <Columns>
         <PropertyColumn Property="x => x.Id" Title="#" />
-        <PropertyColumn Property="x => x.Name" Title="Time" />        
+        <PropertyColumn Property="x => x.Name" Title="Time" />
+        <TemplateColumn Class="d-flex justify-end">
+            <CellTemplate>
+                <MudStack Row>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                                   Href="@($"/times/editar/{context.Item.Id}")"
+                                   Color="Color.Primary" />                    
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
     </Columns>
 </MudDataGrid>
