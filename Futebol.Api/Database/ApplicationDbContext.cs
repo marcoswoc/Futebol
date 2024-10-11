@@ -14,4 +14,5 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
     }
 
     public DbSet<Team> Teams { get; set; } = null!;
+    public DbSet<Player> Players { get; set; } = null!;
 }
