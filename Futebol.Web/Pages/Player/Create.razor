@@ -1,0 +1,30 @@
+﻿@page "/jogadores/adicionar"
+
+<MudText Typo="Typo.h3">Novo Jogador</MudText>
+<MudPaper Class="pa-8 mt-m4">
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator />
+
+        <MudTextField T="string"
+                      Label="Nome"
+                      HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Name"
+                      For="@(() => InputModel.Name)" />
+
+        <MudTextField T="string"
+                      Label="E-mail"
+                      HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Email"
+                      For="@(() => InputModel.Email)"
+                      InputType="InputType.Email" />
+
+        <MudTextField T="string"
+                      Label="Senha"
+                      HelperText="Campo Obrigatório"
+                      InputType="InputType.Password"
+                      For="@(() => InputModel.Password)"
+                      @bind-Value="InputModel.Password" />
+
+        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Salvar</MudButton>
+    </EditForm>
+</MudPaper>

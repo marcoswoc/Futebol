@@ -1,4 +1,5 @@
 ﻿using Futebol.Api.Endpoints.Account;
+using Futebol.Api.Endpoints.Player;
 using Futebol.Api.Endpoints.Team;
 using Futebol.Api.Entities.Account;
 
@@ -21,6 +22,11 @@ internal static class Endpoint
             .MapEndpoint<GetAllTeamsEndpoint>()
             .MapEndpoint<GetByIdTeamEndpoint>()
             .MapEndpoint<UpdateTeamEndpoint>();
+
+        endpoints.MapGroup("v1/players")
+            .WithTags("players")
+            .RequireAuthorization()
+            .MapEndpoint<CreatePlayerEndpoint>();
 
         endpoints.MapGroup("v1/identity")
             .WithTags("Identity")
