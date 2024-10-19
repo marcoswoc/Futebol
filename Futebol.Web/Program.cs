@@ -25,7 +25,7 @@ builder.Services.AddHttpClient("futebol", opt =>
 }).AddHttpMessageHandler<CookieHandler>();
 
 builder.Services.AddTransient<ITeamHandler, TeamHandler>();
-
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();
+builder.Services.AddTransient<IPlayerHandler, PlayerHandler>();
 
 await builder.Build().RunAsync();

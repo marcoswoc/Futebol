@@ -42,6 +42,7 @@ public static class DependencyInjection
     {
         service.AddSingleton<IEmailSender, MockEmailSender>();
         service.AddTransient<ITeamHandler, TeamHandler>();
+        service.AddTransient<IPlayerHandler, PlayerHandler>();
         service.AddScoped<SeedService>();
         return service;
     }
