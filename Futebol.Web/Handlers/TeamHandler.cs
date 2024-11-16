@@ -31,5 +31,12 @@ public class TeamHandler(IHttpClientFactory httpClientFactory) : ITeamHandler
         var result = await _client.PutAsJsonAsync($"{_api}/{request.Id}", request);
         return await result.Content.ReadFromJsonAsync<Response<TeamModel?>>()
             ?? new(null, 400, "Falha ao atualizar o time");
-    }        
+    }
+    
+    public async Task<Response<TeamModel?>> DeleteAsync(DeleteTeamRequest request)
+    {
+        var result = await _client.DeleteAsync($"{_api}/{request.Id}");
+        return await result.Content.ReadFromJsonAsync<Response<TeamModel?>>()
+            ?? new(null, 400, "Falha ao excluir o time");
+    }
 }

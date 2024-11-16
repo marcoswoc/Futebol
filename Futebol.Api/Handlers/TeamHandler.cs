@@ -89,4 +89,27 @@ public class TeamHandler(ApplicationDbContext _context) : ITeamHandler
             return new(null, 500, "Não foi possível atualizar o time");
         }
     }
+
+    public async Task<Response<TeamModel?>> DeleteAsync(DeleteTeamRequest request)
+    {
+        try
+        {
+            var team = await _context
+                .Teams
+                .FirstOrDefaultAsync(x => x.Id == request.Id);
+
+            if (team is null)
+                return new(null, 404, "Time não encontrado");
+
+            _context.Teams.Remove(team);
+            await _context.SaveChangesAsync();
+
+            return new(team.Model(), message: "Time excluido com sucesso");
+
+        }
+        catch(Exception)
+        {
+            return new(null, 500, "Não foi possível deletar o time");
+        }
+    }
 }
