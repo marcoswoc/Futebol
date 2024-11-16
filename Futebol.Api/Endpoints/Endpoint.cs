@@ -21,7 +21,8 @@ internal static class Endpoint
             .MapEndpoint<CreateTeamEndpoint>()
             .MapEndpoint<GetAllTeamsEndpoint>()
             .MapEndpoint<GetByIdTeamEndpoint>()
-            .MapEndpoint<UpdateTeamEndpoint>();
+            .MapEndpoint<UpdateTeamEndpoint>()
+            .MapEndpoint<DeleteTeamEndpoint>();
 
         endpoints.MapGroup("v1/players")
             .WithTags("players")

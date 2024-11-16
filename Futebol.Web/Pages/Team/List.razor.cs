@@ -53,4 +53,32 @@ public partial class List : ComponentBase
 
         return false;
     };
+
+    public async void OnDeleteButtonClickedAsync(Guid id, string name)
+    {
+        var result = await DialogService.ShowMessageBox(
+            "ATENÇÃO",
+            $"Ao prosseguir o time {name} será excluído",
+            yesText: "Excluir",
+            noText: "Cancelar");
+
+        if (result is true)
+            await OnDeleteAsync(id, name);
+
+        StateHasChanged();
+    }
+
+    private async Task OnDeleteAsync(Guid id, string name)
+    {
+        try
+        {
+            await Handler.DeleteAsync(new() { Id = id });
+            Teams.RemoveAll(x => x.Id == id);
+            Snackbar.Add($"Time {name} excluído", Severity.Success);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
+    }
 }

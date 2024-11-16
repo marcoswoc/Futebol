@@ -23,14 +23,16 @@
                       Class="mt-0" />
     </ToolBarContent>
     <Columns>
-        <PropertyColumn Property="x => x.Id" Title="#" />
         <PropertyColumn Property="x => x.Name" Title="Time" />
-        <TemplateColumn Class="d-flex justify-end">
+        <TemplateColumn  Title="Ações">
             <CellTemplate>
                 <MudStack Row>
                     <MudIconButton Icon="@Icons.Material.Filled.Edit"
                                    Href="@($"/times/editar/{context.Item.Id}")"
-                                   Color="Color.Primary" />                    
+                                   Color="Color.Primary" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                   Color="Color.Error" aria-label="Excluir" 
+                                   OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Name)" />
                 </MudStack>
             </CellTemplate>
         </TemplateColumn>
