@@ -34,6 +34,7 @@ public class TeamHandler(ApplicationDbContext _context) : ITeamHandler
     {
         var query = _context
             .Teams
+            .OrderBy(o => o.Name)
             .AsNoTracking();
         
         var teams = await query
@@ -42,9 +43,9 @@ public class TeamHandler(ApplicationDbContext _context) : ITeamHandler
             .ToListAsync();
 
         var count = await query.CountAsync();
-        var temasModel = teams.Select(x => x.Model()).ToList();
+        var teamsModel = teams.Select(x => x.Model()).ToList();
 
-        return new(temasModel, count, request.PageNumber, request.PageSize);
+        return new(teamsModel, count, request.PageNumber, request.PageSize);
     }
 
     public async Task<Response<TeamModel?>> GetByIdAsync(GetByIdTeamRequest request)

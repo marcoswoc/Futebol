@@ -27,7 +27,11 @@ internal static class Endpoint
         endpoints.MapGroup("v1/players")
             .WithTags("players")
             .RequireAuthorization()
-            .MapEndpoint<CreatePlayerEndpoint>();
+            .MapEndpoint<CreatePlayerEndpoint>()
+            .MapEndpoint<GetAllPlayersEndpoint>()
+            .MapEndpoint<GetByIdPlayerEndpoint>()
+            .MapEndpoint<UpdatePlayerEndpoint>()
+            .MapEndpoint<DeletePlayerEndpoint>();
 
         endpoints.MapGroup("v1/identity")
             .WithTags("Identity")
