@@ -19,7 +19,7 @@ public class TeamHandler(IHttpClientFactory httpClientFactory) : ITeamHandler
     }
 
     public async Task<PagedResponse<List<TeamModel>?>> GetAllAsync(GetAllTeamsRequest request)
-    => await _client.GetFromJsonAsync<PagedResponse<List<TeamModel>?>>(_api)
+        => await _client.GetFromJsonAsync<PagedResponse<List<TeamModel>?>>(_api)
         ?? new(null, 400, "Não foi possível obter os times");
 
     public async Task<Response<TeamModel?>> GetByIdAsync(GetByIdTeamRequest request)
@@ -32,7 +32,7 @@ public class TeamHandler(IHttpClientFactory httpClientFactory) : ITeamHandler
         return await result.Content.ReadFromJsonAsync<Response<TeamModel?>>()
             ?? new(null, 400, "Falha ao atualizar o time");
     }
-    
+
     public async Task<Response<TeamModel?>> DeleteAsync(DeleteTeamRequest request)
     {
         var result = await _client.DeleteAsync($"{_api}/{request.Id}");

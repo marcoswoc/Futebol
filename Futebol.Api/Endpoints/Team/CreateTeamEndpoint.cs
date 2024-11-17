@@ -6,8 +6,9 @@ namespace Futebol.Api.Endpoints.Team;
 public class CreateTeamEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-        => app.MapPost("/", HandleAsync);
-    private static async Task<IResult> HandleAsync(
+        => app.MapPost("/", HandlerAsync);
+
+    private static async Task<IResult> HandlerAsync(
         ITeamHandler _handler,
         CreateTeamRequest request)
     {

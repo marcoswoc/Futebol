@@ -1,20 +1,18 @@
 ﻿using Futebol.Shared.Handlers;
-using Futebol.Shared.Requests.Team;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Futebol.Api.Endpoints.Team;
+namespace Futebol.Api.Endpoints.Player;
 
-public class GetByIdTeamEndpoint : IEndpoint
+public class DeletePlayerEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-        => app.MapGet("/{id}", HandlerAsync);
+        => app.MapDelete("/{id}", HandlerAsync);
 
     private static async Task<IResult> HandlerAsync(
-        ITeamHandler _handler,
+        IPlayerHandler _handler,
         [FromRoute] Guid id)
     {
-        var request = new GetByIdTeamRequest { Id = id };
-        var result = await _handler.GetByIdAsync(request);
+        var result = await _handler.DeleteAsync(new() { Id = id });
 
         return result.IsSucess
             ? TypedResults.Ok(result)

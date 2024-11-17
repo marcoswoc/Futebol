@@ -8,9 +8,9 @@ namespace Futebol.Api.Endpoints.Team;
 public class UpdateTeamEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-        => app.MapPut("/{id}", HandleAsync);
+        => app.MapPut("/{id}", HandlerAsync);
 
-    private static async Task<IResult> HandleAsync(
+    private static async Task<IResult> HandlerAsync(
         ITeamHandler _handler,
         [FromBody] UpdateTeamRequest request,
         [FromRoute] Guid id)
